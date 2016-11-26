@@ -1,0 +1,40 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:param name="page" value="index" />
+
+    <ui:define name="pageTitle">Index</ui:define>
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="id" value="#{personDetailsBean.id}"/>
+            <f:viewAction action="#{personDetailsBean.onParametersLoaded()}" />
+        </f:metadata>
+
+
+        <c:set var="person" value="#{personDetailsBean.person}" />
+
+        <h:panelGrid id="panel" columns="2">
+            <h:outputLabel value="Voornaam" />
+            <h:outputText value="#{person.voornaam}"/>
+
+            <h:outputLabel value="Achternaam" />
+            <h:outputText value="#{person.achternaam}"/>
+
+            <h:outputLabel value="Geslacht" />
+            <h:outputText value="#{person.gender}"/>
+
+            <h:outputLabel value="Stad" />
+            <h:outputText value="#{person.city.name}"/>
+
+            <h:outputLabel value="Postcode" />
+            <h:outputText value="#{person.city.postcode}"/>
+        </h:panelGrid>
+
+        <h:link outcome="/persons/all">back</h:link>
+    </ui:define>
+</ui:composition>

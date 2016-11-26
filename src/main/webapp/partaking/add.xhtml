@@ -1,0 +1,39 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:param name="page" value="index" />
+
+    <ui:define name="pageTitle">Index</ui:define>
+
+    <ui:define name="content">
+        <h1>
+            <h:outputText value="#{activiteitBean.activiteit.datum}"/>
+            <h:outputText value="#{activiteitBean.activiteit.activiteitType}"/>
+        </h1>
+
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel>Voornaam</h:outputLabel>
+                <h:inputText value="#{addDeelnameBean.person.voornaam}"/>
+
+                <h:outputLabel>Achternaam</h:outputLabel>
+                <h:inputText value="#{addDeelnameBean.person.achternaam}"/>
+
+                <h:outputLabel>Postcode</h:outputLabel>
+                <h:inputText value="#{addDeelnameBean.city.value}"/>
+
+                <h:outputLabel>Type</h:outputLabel>
+                <h:selectOneMenu value="#{addDeelnameBean.deelnameType}">
+                    <f:selectItems value="#{deelnameTypeOptions.options}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+
+            <h:commandLink action="#{addDeelnameBean.save()}"
+                           value="Opslaan"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

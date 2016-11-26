@@ -1,0 +1,22 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:param name="page" value="index" />
+
+    <ui:define name="pageTitle">Index</ui:define>
+
+    <ui:define name="content">
+        <p:dataList value="#{activiteitOverviewBean.allActiviteiten}" var="activiteit" type="ordered">
+            <h:link outcome="/activiteiten/details">
+                <h:outputText value="#{activiteit.datum}"/>
+                <f:param name="id" value="#{activiteit.id}" />
+            </h:link>
+            #{activiteit.activiteitType}
+        </p:dataList>
+
+        <h:link outcome="/activiteiten/add">Toevoegen</h:link>
+    </ui:define>
+</ui:composition>
