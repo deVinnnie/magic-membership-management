@@ -13,7 +13,7 @@
             <p:outputLabel for="inline" value="Datum" />
             <p:calendar id="inline" value="#{eventAddBean.event.datum}" mode="inline" />
 
-            <h:selectOneMenu value="#{eventAddBean.event.activiteitType}">
+            <h:selectOneMenu value="#{eventAddBean.event.eventType}">
                 <f:selectItems value="#{activiteitTypeOptions.options}" />
             </h:selectOneMenu>
 

@@ -11,8 +11,8 @@
 
     <ui:define name="content">
         <h1>
-            <h:outputText value="#{activiteitBean.activiteit.datum}"/>
-            <h:outputText value="#{activiteitBean.activiteit.activiteitType}"/>
+            <h:outputText value="#{activiteitBean.event.datum}"/>
+            <h:outputText value="#{activiteitBean.event.eventType}"/>
         </h1>
 
         <h:form>
@@ -27,7 +27,7 @@
                 <h:inputText value="#{addDeelnameBean.city.value}"/>
 
                 <h:outputLabel>Type</h:outputLabel>
-                <h:selectOneMenu value="#{addDeelnameBean.deelnameType}">
+                <h:selectOneMenu value="#{addDeelnameBean.partakingType}">
                     <f:selectItems value="#{deelnameTypeOptions.options}" />
                 </h:selectOneMenu>
             </h:panelGrid>

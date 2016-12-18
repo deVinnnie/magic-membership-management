@@ -103,6 +103,18 @@
             <version>1.0.10</version>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+        </dependency>
+
         <!--Required to solve an startup error with embedded tomcat
         (java.lang.IllegalStateException: Could not find backup for factory javax.faces.context.FacesContextFactory.)-->
         <!--<dependency>

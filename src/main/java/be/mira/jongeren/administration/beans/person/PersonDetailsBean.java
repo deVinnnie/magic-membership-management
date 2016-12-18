@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.beans.person;
 
 import be.mira.jongeren.administration.domain.Person;
-import be.mira.jongeren.administration.service.PersoonService;
+import be.mira.jongeren.administration.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
@@ -20,7 +20,7 @@ public class PersonDetailsBean {
     private Long id;
 
     @Autowired
-    private PersoonService personService;
+    private PersonService personService;
 
     @PostConstruct
     public void setUp(){

@@ -1,14 +1,14 @@
 package be.mira.jongeren.administration.beans.event;
 
-import be.mira.jongeren.administration.domain.ActiviteitType;
+import be.mira.jongeren.administration.domain.EventType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 @Component
 @ApplicationScope
-public class ActiviteitTypeOptions {
+public class EventTypeOptions {
 
-    public ActiviteitType[] getOptions(){
-        return  ActiviteitType.values();
+    public EventType[] getOptions(){
+        return  EventType.values();
     }
 }

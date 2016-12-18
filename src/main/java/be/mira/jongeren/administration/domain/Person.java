@@ -2,10 +2,8 @@ package be.mira.jongeren.administration.domain;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Person extends AbstractEntity{
@@ -21,6 +19,9 @@ public class Person extends AbstractEntity{
 
     @Enumerated(EnumType.STRING)
     private Gender gender = Gender.X;
+
+    @Temporal(TemporalType.DATE)
+    private Date birthDate;
 
     public String getVoornaam() {
         return voornaam;
@@ -52,5 +53,13 @@ public class Person extends AbstractEntity{
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }

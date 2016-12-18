@@ -9,12 +9,12 @@
     <ui:define name="pageTitle">Index</ui:define>
 
     <ui:define name="content">
-        <p:dataList value="#{activiteitOverviewBean.allActiviteiten}" var="activiteit" type="ordered">
+        <p:dataList value="#{activiteitOverviewBean.allActiviteiten}" var="event" type="ordered">
             <h:link outcome="/activiteiten/details">
-                <h:outputText value="#{activiteit.datum}"/>
-                <f:param name="id" value="#{activiteit.id}" />
+                <h:outputText value="#{event.datum}"/>
+                <f:param name="id" value="#{event.id}" />
             </h:link>
-            #{activiteit.activiteitType}
+            #{event.eventType}
         </p:dataList>
 
         <h:link outcome="/activiteiten/add">Toevoegen</h:link>

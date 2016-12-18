@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.beans.person;
 
 import be.mira.jongeren.administration.domain.Person;
-import be.mira.jongeren.administration.service.PersoonService;
+import be.mira.jongeren.administration.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import javax.faces.bean.ViewScoped;
 public class PersonAddBean {
 
     @Autowired
-    private PersoonService personService;
+    private PersonService personService;
 
     private Person person = new Person();
 

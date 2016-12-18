@@ -1,6 +1,6 @@
 package be.mira.jongeren.administration.domain;
 
-public enum DeelnameType {
+public enum PartakingType {
     DEELNEMER,
     LEIDING,
     EXTERN

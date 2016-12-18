@@ -11,29 +11,29 @@
 
     <ui:define name="content">
         <f:metadata>
-            <f:viewParam name="id" value="#{activiteitDetailsBean.id}"/>
-            <f:viewAction action="#{activiteitDetailsBean.onParametersLoaded()}" />
+            <f:viewParam name="id" value="#{eventDetailsBean.id}"/>
+            <f:viewAction action="#{eventDetailsBean.onParametersLoaded()}" />
         </f:metadata>
 
-        <c:set var="event" value="#{activiteitDetailsBean.activiteit}" />
+        <c:set var="event" value="#{eventDetailsBean.event}" />
 
         <h:link outcome="/activiteiten/all">back</h:link>
 
         <h1>
-            <h:outputText value="#{event.datum} (#{event.activiteitType})"/>
+            <h:outputText value="#{event.datum} (#{event.eventType})"/>
         </h1>
 
-        <p:dataTable var="deelname" value="#{event.deelnames}">
+        <p:dataTable var="partaking" value="#{event.partakings}">
             <p:column headerText="Voornaam">
-                <h:outputText value="#{deelname.person.voornaam}" />
+                <h:outputText value="#{partaking.person.voornaam}" />
             </p:column>
 
             <p:column headerText="Achternaam">
-                <h:outputText value="#{deelname.person.achternaam}" />
+                <h:outputText value="#{partaking.person.achternaam}" />
             </p:column>
 
             <p:column headerText="Type">
-                <h:outputText value="#{deelname.deelnameType}" />
+                <h:outputText value="#{partaking.partakingType}" />
             </p:column>
         </p:dataTable>
 

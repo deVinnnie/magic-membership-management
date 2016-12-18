@@ -1,4 +1,4 @@
-INSERT INTO activiteit(id, version, datum, activiteit_type)
+INSERT INTO event(id, version, datum, event_type)
 VALUES('10', '1', '2015-01-17', 'SUPERNOVA'),
       ('20', '1', '2015-01-10', 'MAIN_SEQUENCE');
 
@@ -13,7 +13,7 @@ INSERT INTO person(id, version, voornaam, achternaam, gender, city_id) VALUES
       ('80', '1', 'Harry', 'Potter', 'M', '140'),
       ('90', '1', 'Ron', 'Weasley', 'M', '140');
 
-INSERT INTO deelname(id, version, deelname_type, activiteit_id, person_id) VALUES
+INSERT INTO partaking(id, version, partaking_type, event_id, person_id) VALUES
       ('10' , '1', 'LEIDING', '10', '40'),
       ('20' , '1', 'DEELNEMER', '10', '60'),
       ('30' , '1', 'DEELNEMER', '10', '70'),

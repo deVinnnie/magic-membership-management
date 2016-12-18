@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.domain;
 
-public enum ActiviteitType {
+public enum EventType {
     MAIN_SEQUENCE,
     SUPERNOVA,
-    VAR
+    OFF_TRACK
 }

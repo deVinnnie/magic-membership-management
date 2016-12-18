@@ -1,23 +1,25 @@
 package be.mira.jongeren.administration.beans.event;
 
-import be.mira.jongeren.administration.domain.Activiteit;
+import be.mira.jongeren.administration.domain.Event;
 import be.mira.jongeren.administration.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@Named
 public class EventAddBean {
 
-    private Activiteit event = new Activiteit();
+    private Event event = new Event();
 
-    @Autowired
+    @Inject
     private EventService eventService;
 
-    public Activiteit getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Activiteit event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 

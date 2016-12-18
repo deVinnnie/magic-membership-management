@@ -1,8 +1,7 @@
 package be.mira.jongeren.administration.service;
 
-import be.mira.jongeren.administration.domain.Activiteit;
-import be.mira.jongeren.administration.domain.ActiviteitType;
-import be.mira.jongeren.administration.repository.ActiviteitRepository;
+import be.mira.jongeren.administration.domain.Event;
+import be.mira.jongeren.administration.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +11,13 @@ import java.util.List;
 public class EventService {
 
     @Autowired
-    private ActiviteitRepository repository;
+    private EventRepository repository;
 
-    public void save(Activiteit event) {
+    public void save(Event event) {
         this.repository.save(event);
     }
 
-    public List<Activiteit> findAll() {
+    public List<Event> findAll() {
         return repository.findAll();
     }
 }

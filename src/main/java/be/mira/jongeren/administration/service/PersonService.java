@@ -1,17 +1,17 @@
 package be.mira.jongeren.administration.service;
 
 import be.mira.jongeren.administration.domain.Person;
-import be.mira.jongeren.administration.repository.PersoonRepository;
+import be.mira.jongeren.administration.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PersoonService {
+public class PersonService {
 
     @Autowired
-    private PersoonRepository repository;
+    private PersonRepository repository;
 
     public Person save(Person person){
         return this.repository.save(person);

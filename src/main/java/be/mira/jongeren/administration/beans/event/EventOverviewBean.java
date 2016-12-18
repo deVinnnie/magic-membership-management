@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.beans.event;
 
-import be.mira.jongeren.administration.domain.Activiteit;
-import be.mira.jongeren.administration.repository.ActiviteitRepository;
+import be.mira.jongeren.administration.domain.Event;
+import be.mira.jongeren.administration.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
@@ -11,23 +11,23 @@ import java.util.List;
 
 @Component
 @RequestScope
-public class ActiviteitOverviewBean {
+public class EventOverviewBean {
     
-    private List<Activiteit> allActiviteiten;
+    private List<Event> allActiviteiten;
     
     @Autowired
-    private ActiviteitRepository activiteitRepository;
+    private EventRepository eventRepository;
     
     @PostConstruct
     public void setUp(){
-        this.allActiviteiten = activiteitRepository.findAll();
+        this.allActiviteiten = eventRepository.findAll();
     }
 
-    public List<Activiteit> getAllActiviteiten() {
+    public List<Event> getAllActiviteiten() {
         return allActiviteiten;
     }
 
-    public void setAllActiviteiten(List<Activiteit> allActiviteiten) {
+    public void setAllActiviteiten(List<Event> allActiviteiten) {
         this.allActiviteiten = allActiviteiten;
     }
 }

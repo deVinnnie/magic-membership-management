@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.beans.partaking;
 
 import be.mira.jongeren.administration.beans.event.EventDetailsBean;
-import be.mira.jongeren.administration.domain.Event;
+import be.mira.jongeren.administration.domain.City;
 import be.mira.jongeren.administration.domain.Partaking;
 import be.mira.jongeren.administration.domain.PartakingType;
 import be.mira.jongeren.administration.domain.Person;
@@ -10,16 +10,11 @@ import be.mira.jongeren.administration.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public class AddExistingPersonBean {
+public class AddPartakingBean {
 
-    private Long personId;
-
-    private Event event;
-
-    private PartakingType partakingType = PartakingType.DEELNEMER;
+    @Autowired
+    private PartakingService partakingService;
 
     @Autowired
     private PersonService personService;
@@ -27,46 +22,35 @@ public class AddExistingPersonBean {
     @Autowired
     private EventDetailsBean eventDetailsBean;
 
-    @Autowired
-    private PartakingService partakingService;
+    private Person person = new Person();
+
+    private City city = new City();
+
+    private PartakingType partakingType = PartakingType.DEELNEMER;
 
     public String toForm(){
-        return "/partaking/add-existing?faces-redirect=true";
-    }
-
-    public List<Person> getAllPersons(){
-        return personService.findAll();
+        return "/partaking/add?faces-redirect=true";
     }
 
     public String save(){
-        Person existingPerson = personService.findOne(personId);
+        Person savedPerson = personService.save(person);
 
         Partaking partaking = new Partaking();
         partaking.setEvent(eventDetailsBean.getEvent());
-        partaking.setPerson(existingPerson);
+        partaking.setPerson(savedPerson);
         partaking.setPartakingType(partakingType);
 
         this.partakingService.save(partaking);
 
         return "/activiteiten/detail?faces-redirect=true";
-
     }
 
-
-    public Long getPersonId() {
-        return personId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public PartakingType getPartakingType() {
@@ -75,5 +59,13 @@ public class AddExistingPersonBean {
 
     public void setPartakingType(PartakingType partakingType) {
         this.partakingType = partakingType;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }

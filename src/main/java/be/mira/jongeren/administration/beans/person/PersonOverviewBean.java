@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.beans.person;
 
 import be.mira.jongeren.administration.domain.Person;
-import be.mira.jongeren.administration.repository.PersoonRepository;
+import be.mira.jongeren.administration.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
@@ -14,13 +14,13 @@ import java.util.List;
 public class PersonOverviewBean {
 
     @Autowired
-    private PersoonRepository persoonRepository;
+    private PersonRepository personRepository;
 
     private List<Person> allPersons;
 
     @PostConstruct
     public void setUp(){
-        this.allPersons = persoonRepository.findAll();
+        this.allPersons = personRepository.findAll();
     }
 
     public List<Person> getAllPersons() {
