@@ -17,4 +17,19 @@ public class EventMother {
         Event event = new Event(c.getTime(), EventType.MAIN_SEQUENCE);
         return event;
     }
+
+    public static Event createEventWithSingleParticipant() {
+        Event.EventBuilder eventBuilder = new Event.EventBuilder();
+        Person.PersonBuilder personBuilder = new Person.PersonBuilder();
+        Event event = eventBuilder.build();
+
+        event.getPartakings().add(
+                new Partaking(
+                        personBuilder.build(),
+                        PartakingType.DEELNEMER,
+                        event
+                )
+        );
+        return event;
+    }
 }

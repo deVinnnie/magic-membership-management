@@ -3,6 +3,8 @@ package be.mira.jongeren.administration.domain;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,9 +43,10 @@ public class Event{
     private Date datum;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
-    private List<Partaking> partakings;
+    private List<Partaking> partakings = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private EventType eventType;
 
     public Event() {
@@ -52,6 +55,10 @@ public class Event{
     public Event(Date datum, EventType eventType) {
         this.datum = datum;
         this.eventType = eventType;
+    }
+
+    private Event(EventBuilder builder) {
+        this(builder.datum, builder.eventType);
     }
 
     public Date getDatum() {
@@ -111,5 +118,25 @@ public class Event{
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+
+    public static class EventBuilder {
+        private Date datum = new Date();
+        private EventType eventType = EventType.MAIN_SEQUENCE;
+
+        public Event build(){
+            return new Event(this);
+        }
+
+        public EventBuilder datum(Date datum){
+            this.datum = datum;
+            return this;
+        }
+
+        public EventBuilder type(EventType type){
+            this.eventType = type;
+            return this;
+        }
     }
 }

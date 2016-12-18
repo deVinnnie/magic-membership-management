@@ -10,10 +10,6 @@ import javax.persistence.Id;
 @Entity
 public class City extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @NotBlank
     private String postcode;
 
@@ -22,16 +18,6 @@ public class City extends AbstractEntity{
 
     @NotBlank
     private String region;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getPostcode() {
         return postcode;

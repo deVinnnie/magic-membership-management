@@ -4,14 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Partaking extends AbstractEntity{
 
     @ManyToOne
+    @NotNull
     private Person person;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private PartakingType partakingType;
 
     @ManyToOne
@@ -48,5 +51,10 @@ public class Partaking extends AbstractEntity{
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public static class PartakingBuilder {
+        private Person person;
+        private PartakingType partakingType = PartakingType.DEELNEMER;
     }
 }
