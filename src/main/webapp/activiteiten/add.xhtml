@@ -14,7 +14,7 @@
             <p:calendar id="inline" value="#{eventAddBean.event.datum}" mode="inline" />
 
             <h:selectOneMenu value="#{eventAddBean.event.eventType}">
-                <f:selectItems value="#{activiteitTypeOptions.options}" />
+                <f:selectItems value="#{eventTypeOptions.options}" />
             </h:selectOneMenu>
 
             <h:commandLink action="#{eventAddBean.save()}">Opslaan</h:commandLink>

@@ -27,7 +27,14 @@ public class EventIdentityGeneratorTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void generateGivesWhenNotAnEvent(){
+    public void generateGivesExceptionWhenNotAnEvent(){
         generator.generate(null, new Object());
+    }
+
+    @Test
+    public void generateGivesUniqueIdForEventsOnSameDate(){
+        Event event1 = EventMother.createEvent();
+        Event event2 = EventMother.createEvent();
+        generator.generate(null, event1);
     }
 }

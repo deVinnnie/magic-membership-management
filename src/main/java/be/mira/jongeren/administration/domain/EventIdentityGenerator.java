@@ -1,6 +1,5 @@
 package be.mira.jongeren.administration.domain;
 
-import com.sun.corba.se.spi.ior.Identifiable;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.id.IdentityGenerator;
 
