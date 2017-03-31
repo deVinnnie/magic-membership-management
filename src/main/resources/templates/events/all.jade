@@ -1,0 +1,7 @@
+-@ var events: java.util.List[be.mira.jongeren.administration.domain.Event]
+
+ul
+    - for(event <- events)
+        li
+            a(href="/events/#{event.getId}") #{event.getDatum} #{event.getEventType}
+a(href="/events/new") Toevoegen

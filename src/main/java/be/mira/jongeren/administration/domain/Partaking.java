@@ -53,6 +53,15 @@ public class Partaking extends AbstractEntity{
         this.event = event;
     }
 
+    @Override
+    public String toString() {
+        return "Partaking{" +
+                "person=" + person +
+                ", partakingType=" + partakingType +
+                ", event=" + event.getId() +
+                '}';
+    }
+
     public static class PartakingBuilder {
         private Person person;
         private PartakingType partakingType = PartakingType.DEELNEMER;

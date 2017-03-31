@@ -34,4 +34,13 @@ public class City extends AbstractEntity{
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "postcode='" + postcode + '\'' +
+                ", name='" + name + '\'' +
+                ", region='" + region + '\'' +
+                '}';
+    }
 }

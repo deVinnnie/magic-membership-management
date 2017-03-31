@@ -1,0 +1,11 @@
+-@ var eventTypeOptions: Array[be.mira.jongeren.administration.domain.EventType]
+
+form(method="POST" action="/events/new")
+    select(name="eventType")
+        - for(eventType <- eventTypeOptions)
+            option(value="#{eventType}") #{eventType}
+
+    label Datum
+    input(type="text" name="datum")
+
+    input(type="submit" value="Opslaan")

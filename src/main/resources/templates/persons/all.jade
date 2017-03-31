@@ -1,0 +1,9 @@
+-@ var persons: java.util.List[be.mira.jongeren.administration.domain.Person]
+
+ul
+    - for(person <- persons)
+        li
+            a(href="/persons/details/#{person.getId}") #{person.getVoornaam} #{person.getAchternaam}
+
+a(href="/persons/add") Toevoegen
+a(href="/index") Index

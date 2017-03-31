@@ -1,6 +1,7 @@
 package be.mira.jongeren.administration.domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Past;
@@ -23,6 +24,7 @@ public class Person extends AbstractEntity{
 
     @Temporal(TemporalType.DATE)
     @Past
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthDate;
 
     public Person(){}
@@ -74,6 +76,17 @@ public class Person extends AbstractEntity{
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "voornaam='" + voornaam + '\'' +
+                ", achternaam='" + achternaam + '\'' +
+                ", city=" + city +
+                ", gender=" + gender +
+                ", birthDate=" + birthDate +
+                '}';
     }
 
     public static class PersonBuilder{

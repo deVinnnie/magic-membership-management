@@ -1,0 +1,21 @@
+-@ var person: be.mira.jongeren.administration.domain.Person
+//
+// <f:viewParam name="id" value="#{personDetailsBean.id}"/>
+// <f:viewAction action="#{personDetailsBean.onParametersLoaded()}" />
+
+label Voornaam
+p #{person.getVoornaam}
+
+label Achternaam
+p #{person.getAchternaam}
+
+label Geslacht
+p #{person.getGender}
+
+label Stad
+p #{person.getCity.getName}
+
+label Postcodes
+p #{person.getCity.getPostcode}
+
+a(href="/persons/") Back

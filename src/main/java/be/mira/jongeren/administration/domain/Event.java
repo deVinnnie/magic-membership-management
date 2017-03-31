@@ -1,6 +1,7 @@
 package be.mira.jongeren.administration.domain;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -40,9 +41,10 @@ public class Event{
     private Long version;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date datum;
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Partaking> partakings = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
@@ -75,6 +77,10 @@ public class Event{
 
     public void setPartakings(List<Partaking> partakings) {
         this.partakings = partakings;
+    }
+
+    public void addPartaking(Partaking partaking){
+        this.partakings.add(partaking);
     }
 
     public EventType getEventType() {
@@ -120,6 +126,16 @@ public class Event{
         this.version = version;
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", version=" + version +
+                ", datum=" + datum +
+                ", partakings=" + partakings +
+                ", eventType=" + eventType +
+                '}';
+    }
 
     public static class EventBuilder {
         private Date datum = new Date();

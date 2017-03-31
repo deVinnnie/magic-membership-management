@@ -9,6 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <properties>
+        <scala.version>2.12.1</scala.version>
+        <scalate.version>1.8.0</scalate.version>
+    </properties>
+
     <repositories>
         <repository>
             <id>prime-repo</id>
@@ -21,7 +26,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>LATEST</version>
+        <version>1.4.4.RELEASE</version>
     </parent>
 
     <dependencies>
@@ -35,47 +40,73 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JSF and Servlets -->
         <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-            <version>2.2.8</version>
-            <!--<scope>provided</scope>-->
-            <scope>compile</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
-            <version>2.2.8</version>
-            <scope>compile</scope>
-            <!--<optional>true</optional>-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
         </dependency>
 
+        <!-- Scalate -->
         <dependency>
-            <groupId>com.ocpsoft</groupId>
-            <artifactId>prettyfaces-jsf2</artifactId>
-            <version>3.3.3</version>
+            <groupId>org.scalatra.scalate</groupId>
+            <artifactId>scalate-spring-mvc_2.11</artifactId>
+            <version>${scalate.version}</version>
         </dependency>
 
-
+        <!-- Scala -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.0</version>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.11.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>el-impl</artifactId>
-            <version>2.2</version>
-        </dependency>
+        <!--&lt;!&ndash; JSF and Servlets &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.sun.faces</groupId>-->
+            <!--<artifactId>jsf-api</artifactId>-->
+            <!--<version>2.2.8</version>-->
+            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+            <!--<scope>compile</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.sun.faces</groupId>-->
+            <!--<artifactId>jsf-impl</artifactId>-->
+            <!--<version>2.2.8</version>-->
+            <!--<scope>compile</scope>-->
+            <!--&lt;!&ndash;<optional>true</optional>&ndash;&gt;-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.ocpsoft</groupId>-->
+            <!--<artifactId>prettyfaces-jsf2</artifactId>-->
+            <!--<version>3.3.3</version>-->
+        <!--</dependency>-->
+
+
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>jsp-api</artifactId>-->
+            <!--<version>2.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>jstl</artifactId>-->
+            <!--<version>1.2</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.glassfish.web</groupId>-->
+            <!--<artifactId>el-impl</artifactId>-->
+            <!--<version>2.2</version>-->
+        <!--</dependency>-->
 
         <!-- DB -->
         <dependency>
@@ -90,19 +121,27 @@
             <version>3.15.1</version>
         </dependency>
 
-        <!-- PrimeFaces -->
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>6.0</version>
-        </dependency>
+        <!--&lt;!&ndash; PrimeFaces &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.primefaces</groupId>-->
+            <!--<artifactId>primefaces</artifactId>-->
+            <!--<version>6.0</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>delta</artifactId>
-            <version>1.0.10</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.primefaces.themes</groupId>-->
+            <!--<artifactId>delta</artifactId>-->
+            <!--<version>1.0.10</version>-->
+        <!--</dependency>-->
 
+
+        <!--<dependency>-->
+            <!--<groupId>javax</groupId>-->
+            <!--<artifactId>javaee-web-api</artifactId>-->
+            <!--<version>7.0</version>-->
+        <!--</dependency>-->
+
+        <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -111,24 +150,60 @@
         </dependency>
 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.3.1</version>
+            <scope>test</scope>
         </dependency>
 
-        <!--Required to solve an startup error with embedded tomcat
-        (java.lang.IllegalStateException: Could not find backup for factory javax.faces.context.FacesContextFactory.)-->
-        <!--<dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-        </dependency>-->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>3.3.1</version>
+            <scope>test</scope>
+        </dependency>
 
-
-
+        <dependency>
+            <groupId>com.ninja-squad</groupId>
+            <artifactId>DbSetup</artifactId>
+            <version>2.1.0</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
     <build>
+
+        <pluginManagement>
+            <plugins>
+                <!-- Executes the antrun plugin in Eclipse too -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecyclemappingmetadata>
+                            <pluginexecutions>
+                                <pluginexecution>
+                                    <pluginexecutionfilter>
+                                        <groupid>org.apache.maven.plugins</groupid>
+                                        <artifactid>maven-antrun-plugin</artifactid>
+                                        <versionrange>1.7</versionrange>
+                                        <goals>
+                                            <goal>run</goal>
+                                        </goals>
+                                    </pluginexecutionfilter>
+                                    <action>
+                                        <execute>
+                                        </execute></action>
+                                </pluginexecution>
+                            </pluginexecutions>
+                        </lifecyclemappingmetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -139,9 +214,37 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+
+            <!-- Use plugin to package as an executable JAR -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Scalate template pre compiler -->
+            <plugin>
+                <groupId>org.scalatra.scalate</groupId>
+                <artifactId>maven-scalate-plugin_2.11</artifactId>
+                <version>1.7.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>precompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
         <!--this is required to enable PrettyFaces to work-->
         <!--<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>-->
+
+        <resources>
+            <resource>
+                <directory>src/resources</directory>
+            </resource>
+        </resources>
     </build>
+
 </project>

@@ -1,0 +1,32 @@
+-@ var genderOptions: Array[be.mira.jongeren.administration.domain.Gender]
+
+form(method="POST")
+    label Voornaam
+    input(type="text" name="voornaam")
+
+    label Achternaam
+    input(type="text" name="achternaam")
+
+    label Geslacht
+    select(name="gender")
+        - for (gender <- genderOptions)
+            option(value="#{gender}") #{gender}
+
+    label Geboortedatum
+    input(type="text" name="birthDate")
+
+    label Stad
+    input(type="text" name="postcode")
+
+
+        //select
+        //- for( city <- cities)
+        //    option(value="#{city.getId}") #{city.getPostcode} - #{city.getName}
+
+    //<p:autoComplete id="city" dropdown="true"
+    //                value="#{personAddBean.person.city}"
+    //                var="city"
+    //                itemLabel="#{city.postcode}"
+    //                completeMethod="#{cityBean.searchCity}" />
+    //
+    input(type="submit" value="Opslaan")

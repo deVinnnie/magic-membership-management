@@ -1,0 +1,32 @@
+-@ var event: be.mira.jongeren.administration.domain.Event
+
+a(href="/events") back
+
+h1 #{event.getDatum} (#{event.getEventType})
+
+table
+    thead
+        tr
+            th Voornaam
+            th Achternaam
+            th Type
+    tbody
+    - for(partaking <- event.getPartakings)
+        tr
+            td #{partaking.getPerson.getVoornaam}
+            td #{partaking.getPerson.getAchternaam}
+            td #{partaking.getPartakingType}
+
+a(href="/events/#{event.getId}/partakings/new") Toevoegen
+
+
+//<h:panelGrid id="panel" columns="2">
+//    <h:outputLabel value="Deelnemers"/>
+//    <h:outputText value="#{event.numberOfParticipants}"/>
+//
+//    <h:outputLabel value="Assistenten"/>
+//    <h:outputText value="#{event.numberOfAssistants}"/>
+//
+//    <h:outputLabel value="Extern"/>
+//    <h:outputText value="#{event.numberOfExternalParticipants}"/>
+//</h:panelGrid>

@@ -1,0 +1,18 @@
+-@ var allPersons: java.util.List[be.mira.jongeren.administration.domain.Person]
+-@ var allPartakingTypes: Array[be.mira.jongeren.administration.domain.PartakingType]
+-@ var event: be.mira.jongeren.administration.domain.Event
+
+h1 #{event.getDatum} #{event.getEventType}
+
+form(method="POST" action="/events/#{event.getId}/partakings/")
+    label Persoon
+    select(name="person")
+        - for( person <- allPersons)
+            option(value="#{person.getId}") #{person.getVoornaam} #{person.getAchternaam}
+
+    label Type
+    select(name="partakingType")
+        - for( partakingType <- allPartakingTypes)
+            option(value=partakingType) #{partakingType}
+
+    input(type="submit" value="Opslaan")
