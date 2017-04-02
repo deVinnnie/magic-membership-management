@@ -3,5 +3,6 @@
 ul
     - for(event <- events)
         li
-            a(href="/events/#{event.getId}") #{event.getDatum} #{event.getEventType}
+            - var id = "%d".format(event.getId)
+            a(href="/events/#{id}") #{event.getDatum} #{event.getEventType}
 a(href="/events/new") Toevoegen

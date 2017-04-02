@@ -1,4 +1,4 @@
-package be.mira.jongeren.administration.util;
+package be.mira.jongeren.administration.util.date;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -8,5 +8,9 @@ public class DateUtils {
 
     public static Date asDate(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static LocalDate asLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 }

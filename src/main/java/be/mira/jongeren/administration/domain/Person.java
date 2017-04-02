@@ -1,11 +1,12 @@
 package be.mira.jongeren.administration.domain;
 
+import be.mira.jongeren.administration.util.date.Past;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Past;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 @Entity
 public class Person extends AbstractEntity{
@@ -22,10 +23,9 @@ public class Person extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private Gender gender = Gender.X;
 
-    @Temporal(TemporalType.DATE)
     @Past
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     public Person(){}
 
@@ -70,11 +70,11 @@ public class Person extends AbstractEntity{
         this.gender = gender;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -87,6 +87,30 @@ public class Person extends AbstractEntity{
                 ", gender=" + gender +
                 ", birthDate=" + birthDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (voornaam != null ? !voornaam.equals(person.voornaam) : person.voornaam != null) return false;
+        if (achternaam != null ? !achternaam.equals(person.achternaam) : person.achternaam != null) return false;
+        if (city != null ? !city.equals(person.city) : person.city != null) return false;
+        if (gender != person.gender) return false;
+        return birthDate != null ? birthDate.equals(person.birthDate) : person.birthDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = voornaam != null ? voornaam.hashCode() : 0;
+        result = 31 * result + (achternaam != null ? achternaam.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
+        return result;
     }
 
     public static class PersonBuilder{

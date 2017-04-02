@@ -7,7 +7,6 @@ import javax.validation.ConstraintViolation;
 import java.time.LocalDate;
 import java.util.Set;
 
-import static be.mira.jongeren.administration.util.DateUtils.asDate;
 import static org.junit.Assert.assertEquals;
 
 public class PersonTest extends BeanValidatorTest{
@@ -24,7 +23,7 @@ public class PersonTest extends BeanValidatorTest{
         Person person = builder.build();
 
         LocalDate dateThenYearsInTheFuture = LocalDate.now().plusYears(10);
-        person.setBirthDate(asDate(dateThenYearsInTheFuture));
+        person.setBirthDate(dateThenYearsInTheFuture);
 
         Set<ConstraintViolation<Person>> violations = validator().validateProperty(person, "birthDate");
         assertEquals(1, violations.size());

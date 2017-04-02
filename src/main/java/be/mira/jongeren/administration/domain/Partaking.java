@@ -1,12 +1,10 @@
 package be.mira.jongeren.administration.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"person_id", "event_id"})})
 public class Partaking extends AbstractEntity{
 
     @ManyToOne
@@ -51,6 +49,24 @@ public class Partaking extends AbstractEntity{
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Partaking partaking = (Partaking) o;
+
+        if (person != null ? !person.equals(partaking.person) : partaking.person != null) return false;
+        return event != null ? event.equals(partaking.event) : partaking.event == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = person != null ? person.hashCode() : 0;
+        result = 31 * result + (event != null ? event.hashCode() : 0);
+        return result;
     }
 
     @Override

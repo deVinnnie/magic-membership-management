@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,9 +41,9 @@ public class Event{
     @Version
     private Long version;
 
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date datum;
+    private LocalDate datum;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Partaking> partakings = new ArrayList<>();
@@ -54,7 +55,7 @@ public class Event{
     public Event() {
     }
 
-    public Event(Date datum, EventType eventType) {
+    public Event(LocalDate datum, EventType eventType) {
         this.datum = datum;
         this.eventType = eventType;
     }
@@ -63,11 +64,11 @@ public class Event{
         this(builder.datum, builder.eventType);
     }
 
-    public Date getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 
@@ -137,15 +138,33 @@ public class Event{
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        if (datum != null ? !datum.equals(event.datum) : event.datum != null) return false;
+        return eventType == event.eventType;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = datum != null ? datum.hashCode() : 0;
+        result = 31 * result + (eventType != null ? eventType.hashCode() : 0);
+        return result;
+    }
+
     public static class EventBuilder {
-        private Date datum = new Date();
+        private LocalDate datum = LocalDate.now();
         private EventType eventType = EventType.MAIN_SEQUENCE;
 
         public Event build(){
             return new Event(this);
         }
 
-        public EventBuilder datum(Date datum){
+        public EventBuilder datum(LocalDate datum){
             this.datum = datum;
             return this;
         }

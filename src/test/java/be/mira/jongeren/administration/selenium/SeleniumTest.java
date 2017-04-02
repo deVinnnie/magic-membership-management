@@ -1,18 +1,27 @@
 package be.mira.jongeren.administration.selenium;
 
 import be.mira.jongeren.administration.Application;
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.destination.DataSourceDestination;
+import com.ninja_squad.dbsetup.operation.Operation;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.sql.DataSource;
 import javax.transaction.Transactional;
 
+import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
+import static com.ninja_squad.dbsetup.Operations.insertInto;
+import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 import static org.junit.Assume.assumeTrue;
 
 /**
@@ -48,10 +57,20 @@ public abstract class SeleniumTest {
 
     private static final String SELENIUM_ENABLED_SYSTEM_PROPERTY = "selenium";
 
+    @Autowired
+    private DataSource dataSource;
+
     @BeforeClass
     public static void setUp(){
-        verifySeleniumEnablingPreConditions();
+        //verifySeleniumEnablingPreConditions();
         initializeWebDriver();
+    }
+
+    @Before
+    public void setup(){
+        Operation operation = deleteAllFrom("partaking", "event", "person");
+        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
+        dbSetup.launch();
     }
 
     private static void verifySeleniumEnablingPreConditions(){
@@ -75,6 +94,10 @@ public abstract class SeleniumTest {
 
     protected WebDriver driver() {
         return driver;
+    }
+
+    protected DataSource dataSource() {
+        return dataSource;
     }
 
     protected String getBaseUrl() {

@@ -1,20 +1,19 @@
 package be.mira.jongeren.administration.domain;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class EventMother {
 
     public static Event createEvent(){
-        Calendar c = Calendar.getInstance();
-        c.set(2015, Calendar.MARCH,14);
-        Event event = new Event(c.getTime(), EventType.MAIN_SEQUENCE);
+        LocalDate date = LocalDate.of(2015, Month.MARCH, 14);
+        Event event = new Event(date, EventType.MAIN_SEQUENCE);
         return event;
     }
 
     public static Event createEarlyEvent(){
-        Calendar c = Calendar.getInstance();
-        c.set(2015, Calendar.MARCH,4);
-        Event event = new Event(c.getTime(), EventType.MAIN_SEQUENCE);
+        LocalDate date = LocalDate.of(2015, Month.MARCH, 4);
+        Event event = new Event(date, EventType.MAIN_SEQUENCE);
         return event;
     }
 

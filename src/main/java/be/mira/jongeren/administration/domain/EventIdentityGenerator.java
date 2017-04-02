@@ -5,6 +5,7 @@ import org.hibernate.id.IdentityGenerator;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 public class EventIdentityGenerator extends IdentityGenerator {
 
@@ -12,9 +13,7 @@ public class EventIdentityGenerator extends IdentityGenerator {
     public Serializable generate(SessionImplementor session, Object obj) {
         if(obj instanceof Event) {
             Event event = (Event) obj;
-
-            SimpleDateFormat formatter = new SimpleDateFormat("YYYYMMdd");
-            String formattedDate = formatter.format(event.getDatum());
+            String formattedDate = event.getDatum().format(DateTimeFormatter.ofPattern("YYYYMMdd"));
             Long generatedId = Long.parseLong(formattedDate + "0");
             return generatedId;
         }
