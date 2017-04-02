@@ -236,15 +236,6 @@
                 </executions>
             </plugin>
         </plugins>
-
-        <!--this is required to enable PrettyFaces to work-->
-        <!--<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>-->
-
-        <resources>
-            <resource>
-                <directory>src/resources</directory>
-            </resource>
-        </resources>
     </build>
 
 </project>
