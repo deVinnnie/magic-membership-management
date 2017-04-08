@@ -2,10 +2,12 @@ package be.mira.jongeren.administration.selenium;
 
 import be.mira.jongeren.administration.domain.Event;
 import be.mira.jongeren.administration.repository.EventRepository;
+import be.mira.jongeren.administration.selenium.pages.PartakingCreationPage;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -40,10 +42,8 @@ public class PartakingSeleniumTest extends SeleniumTest {
 
     @Test
     public void testAddPartakingGivesCorrectResult() {
-        driver().navigate().to(getBaseUrl() + "/events/10/partakings/new");
-
-        WebElement saveButton = driver().findElement(By.tagName("input"));
-        saveButton.click();
+        PartakingCreationPage partakingCreationPage = new PartakingCreationPage(driver(), getBaseUrl());
+        partakingCreationPage.submit();
 
         Event event = eventRepository.getOne(10L);
         assertEquals(1, event.getPartakings().size());
@@ -51,14 +51,16 @@ public class PartakingSeleniumTest extends SeleniumTest {
 
     @Test
     public void testAddPartakingForSamePersonDoesNothing() {
-        driver().navigate().to(getBaseUrl() + "/events/10/partakings/new");
+        PartakingCreationPage partakingCreationPage;
+        partakingCreationPage = new PartakingCreationPage(driver(), getBaseUrl());
+        partakingCreationPage
+                .selectPerson("Harry Potter")
+                .submit();
 
-        WebElement saveButton = driver().findElement(By.tagName("input"));
-        saveButton.click();
-
-        driver().navigate().to(getBaseUrl() + "/events/10/partakings/new");
-        saveButton = driver().findElement(By.tagName("input"));
-        saveButton.click();
+        partakingCreationPage = new PartakingCreationPage(driver(), getBaseUrl());
+        partakingCreationPage
+                .selectPerson("Harry Potter")
+                .submit();
 
         Event event = eventRepository.getOne(10L);
         assertEquals(1, event.getPartakings().size());

@@ -3,6 +3,7 @@ package be.mira.jongeren.administration.selenium;
 import be.mira.jongeren.administration.domain.Event;
 import be.mira.jongeren.administration.domain.EventType;
 import be.mira.jongeren.administration.repository.EventRepository;
+import be.mira.jongeren.administration.selenium.pages.EventCreationPage;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -22,23 +23,10 @@ public class EventSeleniumTest extends SeleniumTest  {
 
     @Test
     public void addEventFormPersistsEvent(){
-        driver().navigate().to(getBaseUrl() + "/events/new");
-
-        WebElement datumInputField = driver().findElement(By.tagName("form"))
-                .findElement(By.name("datum"));
-
-        datumInputField.sendKeys("2015-01-01");
-
-        Select typeSelectBox = new Select(
-                driver()
-                    .findElement(By.tagName("form"))
-                    .findElement(By.name("eventType"))
-        );
-
-        typeSelectBox.selectByValue("SUPERNOVA");
-
-        WebElement formElement = driver().findElement(By.tagName("form"));
-        formElement.submit();
+        EventCreationPage eventCreationPage = new EventCreationPage(driver(), getBaseUrl());
+        eventCreationPage.enterDate("2015-01-01")
+                         .selectEventType("SUPERNOVA")
+                         .submit();
 
         List<Event> allEvents = eventRepository.findAll();
         assertEquals(1, allEvents.size());
@@ -48,7 +36,5 @@ public class EventSeleniumTest extends SeleniumTest  {
         assertNotNull(event.getId());
 
         //assertEquals(new Date(2015,0, 01), event.getDatum());
-
-
     }
 }
