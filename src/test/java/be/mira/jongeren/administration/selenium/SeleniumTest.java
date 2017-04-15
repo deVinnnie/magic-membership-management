@@ -62,7 +62,7 @@ public abstract class SeleniumTest {
 
     @BeforeClass
     public static void setUp(){
-        //verifySeleniumEnablingPreConditions();
+        verifySeleniumEnablingPreConditions();
         initializeWebDriver();
     }
 

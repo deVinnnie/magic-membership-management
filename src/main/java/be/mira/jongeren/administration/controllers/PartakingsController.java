@@ -31,7 +31,7 @@ public class PartakingsController {
     public ModelAndView viewPartakings(@PathVariable("eventId") Long eventId){
         Event event = eventRepository.findOne(eventId);
 
-        ModelAndView mav = new ModelAndView("layout:partakings/all");
+        ModelAndView mav = new ModelAndView("partakings/all");
         mav.addObject("partakings", event.getPartakings());
 
         return mav;
@@ -39,7 +39,7 @@ public class PartakingsController {
 
     @RequestMapping(value="/new", method = RequestMethod.GET)
     public ModelAndView navigateToAddForm(Model model, @PathVariable("eventId") Long eventId, @Autowired PartakingTypeOptions partakingTypeOptions) {
-        ModelAndView mav = new ModelAndView("layout:partakings/new-existing");
+        ModelAndView mav = new ModelAndView("partakings/new-existing");
         mav.addObject("allPartakingTypes", partakingTypeOptions.getOptions());
         mav.addObject("allPersons", personRepository.findAll());
         mav.addObject("event", eventRepository.findOne(eventId));

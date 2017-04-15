@@ -1,11 +1,19 @@
--@ var eventTypeOptions: Array[be.mira.jongeren.administration.domain.EventType]
+//-@ var eventTypeOptions: Array[be.mira.jongeren.administration.domain.EventType]
+//= attributes("title") = "Activiteit Toevoegen"
 
-form(method="POST" action="/events/new")
-    select(name="eventType")
-        - for(eventType <- eventTypeOptions)
-            option(value="#{eventType}") #{eventType}
+extends ../layouts/default
 
-    label Datum
-    input(type="text" name="datum")
+block content
+    form.pure-form.pure-form-aligned(method="POST" action="/events/new")
+        .pure-control-group
+            label Type
+            select(name="eventType")
+                each eventType in eventTypeOptions
+                    option(value="#{eventType.toString()}") #{eventType.toString()}
 
-    input(type="submit" value="Opslaan")
+        .pure-control-group
+            label Datum
+            input(type="text" name="datum")
+
+        .pure-control-group
+            button.pure-button.pure-button-primary Opslaan

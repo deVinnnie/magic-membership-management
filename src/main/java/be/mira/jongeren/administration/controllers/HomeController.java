@@ -13,11 +13,11 @@ public class HomeController {
     /**
      * The index end point.
      *
-     * @return The view: 'layout:index'
+     * @return The view: 'index'
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("layout:index");
+        ModelAndView mav = new ModelAndView("index");
         return mav;
     }
 }

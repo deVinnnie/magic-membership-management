@@ -1,9 +1,12 @@
--@ var persons: java.util.List[be.mira.jongeren.administration.domain.Person]
+//-@ var persons: java.util.List[be.mira.jongeren.administration.domain.Person]
 
-ul
-    - for(person <- persons)
-        li
-            a(href="/persons/details/#{person.getId}") #{person.getVoornaam} #{person.getAchternaam}
+extends ../layouts/default.jade
 
-a(href="/persons/new") Toevoegen
-a(href="/index") Index
+block content
+    ul
+        each person in persons
+            li
+                a(href="/persons/details/#{person.id}") #{person.voornaam} #{person.achternaam}
+
+    a(href="/persons/new") Toevoegen
+    a(href="/index") Index

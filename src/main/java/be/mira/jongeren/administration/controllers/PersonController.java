@@ -26,7 +26,7 @@ public class PersonController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("layout:persons/all");
+        ModelAndView mav = new ModelAndView("persons/all");
         List<Person> persons = personRepository.findAll();
 
         mav.addObject("persons", persons);
@@ -36,7 +36,7 @@ public class PersonController {
 
     @RequestMapping(value="/new", method = RequestMethod.GET)
     public ModelAndView navigateToAddForm(Model model, @Autowired GenderOptions genderOptions) {
-        ModelAndView mav = new ModelAndView("layout:persons/new");
+        ModelAndView mav = new ModelAndView("persons/new");
         mav.addObject("genderOptions", genderOptions.getOptions());
         //mav.addObject("cities", cityRepository.findAll());
         return mav;
@@ -57,7 +57,7 @@ public class PersonController {
     @RequestMapping(value="/details/{id}", method = RequestMethod.GET)
     public ModelAndView details(@PathVariable("id") Long id) {
         Person person = personRepository.findOne(id);
-        ModelAndView mav = new ModelAndView("layout:persons/details", "person", person);
+        ModelAndView mav = new ModelAndView("persons/details", "person", person);
         return mav;
     }
 }

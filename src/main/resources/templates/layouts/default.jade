@@ -1,17 +1,17 @@
--@ var body: String
--@ var title: String = "Spring scalate example"
+//-@ var body: String
+//-@ var title: String = "Spring scalate example"
 
-!!! 5
+doctype html
 html(lang="en")
 	head
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel='stylesheet' href='/webjars/purecss/build/pure.css'>
+
 		title= title
 	body
-
 		header
 			.container
-				h1 Spring Scalate example
+				h1 MIRA Jeugdkern ADMIN
 
-		.container{ 'role' => 'main' }
-			= unescape(body)
+		block content

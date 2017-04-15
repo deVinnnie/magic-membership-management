@@ -1,8 +1,10 @@
--@ var events: java.util.List[be.mira.jongeren.administration.domain.Event]
+//-@ var events: java.util.List[be.mira.jongeren.administration.domain.Event]
 
-ul
-    - for(event <- events)
-        li
-            - var id = "%d".format(event.getId)
-            a(href="/events/#{id}") #{event.getDatum} #{event.getEventType}
-a(href="/events/new") Toevoegen
+extends ../layouts/default.jade
+
+block content
+    ul
+        each event in events
+            li
+                a(href="/events/#{event.getId()}") #{event.getDatum()} #{event.getEventType()}
+    a(href="/events/new") Toevoegen

@@ -1,32 +1,35 @@
--@ var genderOptions: Array[be.mira.jongeren.administration.domain.Gender]
+//-@ var genderOptions: Array[be.mira.jongeren.administration.domain.Gender]
 
-form(method="POST")
-    label Voornaam
-    input(type="text" name="voornaam")
+extends ../layouts/default.jade
 
-    label Achternaam
-    input(type="text" name="achternaam")
+block content
+    form(method="POST")
+        label Voornaam
+        input(type="text" name="voornaam")
 
-    label Geslacht
-    select(name="gender")
-        - for (gender <- genderOptions)
-            option(value="#{gender}") #{gender}
+        label Achternaam
+        input(type="text" name="achternaam")
 
-    label Geboortedatum
-    input(type="text" name="birthDate")
+        label Geslacht
+        select(name="gender")
+            each gender in genderOptions
+                option(value="#{gender.toString()}") #{gender.toString()}
 
-    label Stad
-    input(type="text" name="postcode")
+        label Geboortedatum
+        input(type="text" name="birthDate")
+
+        label Stad
+        input(type="text" name="postcode")
 
 
-        //select
-        //- for( city <- cities)
-        //    option(value="#{city.getId}") #{city.getPostcode} - #{city.getName}
+            //select
+            //- for( city <- cities)
+            //    option(value="#{city.getId}") #{city.getPostcode} - #{city.getName}
 
-    //<p:autoComplete id="city" dropdown="true"
-    //                value="#{personAddBean.person.city}"
-    //                var="city"
-    //                itemLabel="#{city.postcode}"
-    //                completeMethod="#{cityBean.searchCity}" />
-    //
-    input(type="submit" value="Opslaan")
+        //<p:autoComplete id="city" dropdown="true"
+        //                value="#{personAddBean.person.city}"
+        //                var="city"
+        //                itemLabel="#{city.postcode}"
+        //                completeMethod="#{cityBean.searchCity}" />
+        //
+        input(type="submit" value="Opslaan")

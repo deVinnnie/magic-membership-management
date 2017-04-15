@@ -24,7 +24,7 @@ public class EventController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("layout:events/all");
+        ModelAndView mav = new ModelAndView("events/all");
         List<Event> events = eventRepository.findAll();
 
         mav.addObject("events", events);
@@ -34,7 +34,7 @@ public class EventController {
 
     @RequestMapping(value="/new", method = RequestMethod.GET)
     public ModelAndView navigateToAddForm(Model model, @Autowired EventTypeOptions eventTypeOptions) {
-        ModelAndView mav = new ModelAndView("layout:events/new");
+        ModelAndView mav = new ModelAndView("events/new");
         mav.addObject("eventTypeOptions", eventTypeOptions.getOptions());
         return mav;
     }
@@ -50,7 +50,7 @@ public class EventController {
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public ModelAndView details(@PathVariable("id") Long id) {
         Event event = eventRepository.findOne(id);
-        ModelAndView mav = new ModelAndView("layout:events/details", "event", event);
+        ModelAndView mav = new ModelAndView("events/details", "event", event);
         return mav;
     }
 }

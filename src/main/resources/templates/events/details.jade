@@ -1,32 +1,23 @@
--@ var event: be.mira.jongeren.administration.domain.Event
+//-@ var event: be.mira.jongeren.administration.domain.Event
 
-a(href="/events") back
+extends ../layouts/default
 
-h1 #{event.getDatum} (#{event.getEventType})
+block content
+    a(href="/events") back
 
-table
-    thead
-        tr
-            th Voornaam
-            th Achternaam
-            th Type
-    tbody
-    - for(partaking <- event.getPartakings)
-        tr
-            td #{partaking.getPerson.getVoornaam}
-            td #{partaking.getPerson.getAchternaam}
-            td #{partaking.getPartakingType}
+    h1 #{event.datum} (#{event.eventType})
 
-a(href="/events/#{event.getId}/partakings/new") Toevoegen
+    table.pure-table
+        thead
+            tr
+                th Voornaam
+                th Achternaam
+                th Type
+        tbody
+        each partaking in event.partakings
+            tr
+                td #{partaking.person.voornaam}
+                td #{partaking.person.achternaam}
+                td #{partaking.partakingType}
 
-
-//<h:panelGrid id="panel" columns="2">
-//    <h:outputLabel value="Deelnemers"/>
-//    <h:outputText value="#{event.numberOfParticipants}"/>
-//
-//    <h:outputLabel value="Assistenten"/>
-//    <h:outputText value="#{event.numberOfAssistants}"/>
-//
-//    <h:outputLabel value="Extern"/>
-//    <h:outputText value="#{event.numberOfExternalParticipants}"/>
-//</h:panelGrid>
+    a(href="/events/#{event.id}/partakings/new") Toevoegen
