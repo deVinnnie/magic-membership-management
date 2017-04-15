@@ -3,23 +3,28 @@
 extends ../layouts/default
 
 block content
-    form(method="POST")
-        label Voornaam
-        input(type="text" name="voornaam")
+    form.pure-form.pure-form-aligned(method="POST")
+        .pure-control-group
+            label Voornaam
+            input(type="text" name="voornaam")
 
-        label Achternaam
-        input(type="text" name="achternaam")
+        .pure-control-group
+            label Achternaam
+            input(type="text" name="achternaam")
 
-        label Geslacht
-        select(name="gender")
-            each gender in genderOptions
-                option(value="#{gender.toString()}") #{gender.toString()}
+        .pure-control-group
+            label Geslacht
+            select(name="gender")
+                each gender in genderOptions
+                    option(value="#{gender.toString()}") #{gender.toString()}
 
-        label Geboortedatum
-        input(type="text" name="birthDate")
+        .pure-control-group
+            label Geboortedatum
+            input(type="text" name="birthDate")
 
-        label Stad
-        input(type="text" name="postcode")
+        .pure-control-group
+            label Stad
+            input(type="text" name="postcode")
 
 
             //select
@@ -32,4 +37,4 @@ block content
         //                itemLabel="#{city.postcode}"
         //                completeMethod="#{cityBean.searchCity}" />
         //
-        input(type="submit" value="Opslaan")
+        button.pure-button.pure-button.pure-button-primary Opslaan

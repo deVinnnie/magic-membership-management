@@ -13,7 +13,6 @@
         <pippo.version>1.3.0</pippo.version>
     </properties>
 
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -42,7 +41,6 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-
 
         <!-- DB -->
         <dependency>
@@ -110,7 +108,6 @@
 
     <build>
 
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -129,7 +126,25 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-
+            <plugin>
+                <groupId>com.github.warmuuh</groupId>
+                <artifactId>libsass-maven-plugin</artifactId>
+                <version>0.2.6-libsass_3.4.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <imgPath>../img</imgPath>
+                    <inputPath>${basedir}/src/main/sass/</inputPath>
+                    <outputPath>${basedir}/target/classes/static/css/</outputPath>
+                    <includePath>${basedir}/src/main/sass/plugins/</includePath>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

@@ -1,17 +1,28 @@
 //-@ var body: String
 //-@ var title: String = "Spring scalate example"
 
+mixin menu-item(url, label)
+	li(class="pure-menu-item")
+		a(href=url, class="pure-menu-link")= label
+
 doctype html
 html(lang="en")
 	head
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link rel='stylesheet' href='/webjars/purecss/build/pure.css'>
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		link(rel='stylesheet', href='/webjars/purecss/build/pure.css')
+		link(rel='stylesheet', href='/css/main.css')
 
 		title= title
 	body
-		header
-			.container
-				h1 MIRA Jeugdkern ADMIN
+		.header
+			.menu.pure-menu.pure-menu-horizontal.pure-menu-fixed
+				a(class="pure-menu-heading", href="/")
+					| MIRA Jeugdkern ADMIN
 
-		block content
+				ul(class="pure-menu-list")
+					+menu-item("/events", "Activiteiten")
+					+menu-item("/persons", "Personen")
+					+menu-item("/statistics", "Statistieken")
+		.content
+			block content
