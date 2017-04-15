@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-public class JadeView implements View{
+public class PugView implements View{
 
     private String templateName;
 
     private JadeTemplateEngine templateEngine;
 
-    public JadeView(String templateName, JadeTemplateEngine templateEngine) {
+    public PugView(String templateName, JadeTemplateEngine templateEngine) {
         this.templateName = templateName;
         this.templateEngine = templateEngine;
     }
@@ -30,6 +30,6 @@ public class JadeView implements View{
 
     @Override
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        templateEngine.renderResource(templateName, (Map<String, Object>) model, response.getWriter());
+        templateEngine.renderResource(templateName + ".pug", (Map<String, Object>) model, response.getWriter());
     }
 }

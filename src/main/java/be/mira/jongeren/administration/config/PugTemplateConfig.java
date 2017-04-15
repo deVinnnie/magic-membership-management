@@ -1,6 +1,6 @@
 package be.mira.jongeren.administration.config;
 
-import be.mira.jongeren.administration.util.template_engine.JadeViewResolver;
+import be.mira.jongeren.administration.util.template_engine.PugViewResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import ro.pippo.core.RuntimeMode;
 import ro.pippo.jade.JadeTemplateEngine;
 
 @Configuration
-public class JadeTemplateConfig {
+public class PugTemplateConfig {
 
     @Bean
     public JadeTemplateEngine jadeTemplateEngine(){
@@ -21,6 +21,7 @@ public class JadeTemplateConfig {
         PippoSettings pippoSettings = new PippoSettings(RuntimeMode.DEV);
         pippoSettings.overrideSetting(PippoConstants.SETTING_TEMPLATE_PATH_PREFIX, "/templates");
 
+        templateEngine.setFileExtension("pug");
         templateEngine.init(
             new Application(pippoSettings)
         );
@@ -29,7 +30,7 @@ public class JadeTemplateConfig {
 
     @Bean
     public ViewResolver jadeViewResolver(@Autowired JadeTemplateEngine templateEngine){
-        JadeViewResolver resolver = new JadeViewResolver();
+        PugViewResolver resolver = new PugViewResolver();
         resolver.setTemplateEngine(templateEngine);
         return resolver;
     }

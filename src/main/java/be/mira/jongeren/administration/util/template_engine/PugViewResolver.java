@@ -6,13 +6,13 @@ import ro.pippo.jade.JadeTemplateEngine;
 
 import java.util.Locale;
 
-public class JadeViewResolver implements ViewResolver {
+public class PugViewResolver implements ViewResolver {
 
     private JadeTemplateEngine templateEngine;
 
     @Override
     public View resolveViewName(String viewName, Locale locale) throws Exception {
-        return new JadeView(viewName, this.getTemplateEngine());
+        return new PugView(viewName, this.getTemplateEngine());
     }
 
     public JadeTemplateEngine getTemplateEngine() {
