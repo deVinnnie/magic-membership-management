@@ -42,7 +42,7 @@ public class PersonController {
         return mav;
     }
 
-    @RequestMapping(value="/new", method = RequestMethod.POST)
+    @RequestMapping(value="/", method = RequestMethod.POST)
     public ModelAndView add(@ModelAttribute Person person,  @RequestParam("postcode")  String postcode){
         City city = cityRepository.findByPostcode(postcode);
 

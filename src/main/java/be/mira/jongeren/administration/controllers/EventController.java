@@ -39,9 +39,8 @@ public class EventController {
         return mav;
     }
 
-    @RequestMapping(value="/new", method = RequestMethod.POST)
+    @RequestMapping(value="/", method = RequestMethod.POST)
     public ModelAndView add(@ModelAttribute Event event){
-        System.out.println(event);
         eventRepository.save(event);
         ModelAndView mav = new ModelAndView("redirect:/events");
         return mav;
