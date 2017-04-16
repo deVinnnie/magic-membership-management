@@ -4,7 +4,6 @@ import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.id.IdentityGenerator;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,6 +13,9 @@ public class EventIdentityGenerator extends IdentityGenerator {
     public Serializable generate(SessionImplementor session, Object obj) {
         if(obj instanceof Event) {
             Event event = (Event) obj;
+
+            // Need Hibernate 5.2ish
+            //Query query = session.createQuery("from Event as event where event.id = :id", Event.class);
             return generate(event.getDatum());
         }
         else{

@@ -20,7 +20,7 @@ public class Event{
      * YYYY: Year
      * MM: Month (01 = january)
      * DD: Day of month (Starting at 01)
-     * N: A reference number. Starts at 0.
+     * N: A reference number. Starts at 0. (Currently not used, so always '0')
      * Events on the same date are uniquely identified by the reference number.
      *
      * 201510030: The first event on October 03 2015.
