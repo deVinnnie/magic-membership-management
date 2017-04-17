@@ -6,7 +6,7 @@ jdk:
 # Skip Install Step
 install: true
 
-script: "clean test jacoco:report coveralls:report"
+script: "mvn clean test jacoco:report coveralls:report"
 
 notifications:
   email:
