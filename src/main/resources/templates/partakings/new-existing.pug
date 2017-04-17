@@ -1,18 +1,22 @@
 //-@ var allPersons: java.util.List[be.mira.jongeren.administration.domain.Person]
 //-@ var allPartakingTypes: Array[be.mira.jongeren.administration.domain.PartakingType]
 //-@ var event: be.mira.jongeren.administration.domain.Event
+extends ../layouts/default
 
-h1 #{event.datum} #{event.eventType}
+block content
+    h1 #{event.datum} #{event.eventType}
 
-form(method="POST" action="/events/#{event.id}/partakings/")
-    label Persoon
-    select(name="person")
-        each person in allPersons
-            option(value="#{person.id}") #{person.voornaam} #{person.achternaam}
+    form.pure-form.pure-form-aligned(method="POST" action="/events/#{event.id}/partakings/")
+        .pure-control-group
+            label Persoon
+            select(name="person")
+                each person in allPersons
+                    option(value="#{person.id}") #{person.voornaam} #{person.achternaam}
 
-    label Type
-    select(name="partakingType")
-        each partakingType in allPartakingTypes
-            option(value=partakingType) #{partakingType}
+        .pure-control-group
+            label Type
+            select(name="partakingType")
+                each partakingType in allPartakingTypes
+                    option(value=partakingType) #{partakingType}
 
-    input(type="submit" value="Opslaan")
+        button.pure-button.pure-button-primary Opslaan
