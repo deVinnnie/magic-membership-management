@@ -60,9 +60,6 @@ public class PartakingsController {
         event.addPartaking(partaking);
 
         eventRepository.flush();
-        System.out.println(person);
-
-        System.out.println(partaking);
 
         ModelAndView mav = new ModelAndView("redirect:/events/" + event.getId());
         return mav;
