@@ -3,7 +3,7 @@
 extends ../layouts/default
 
 block content
-    form.pure-form.pure-form-aligned(method="POST")
+    form.pure-form.pure-form-aligned(action="/persons/", method="POST")
         .pure-control-group
             label Voornaam
             input(type="text" name="voornaam")
