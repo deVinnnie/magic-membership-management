@@ -9,13 +9,13 @@ import be.mira.jongeren.administration.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/events/{eventId}/partakings")
@@ -41,8 +41,24 @@ public class PartakingsController {
     public ModelAndView navigateToAddForm(Model model, @PathVariable("eventId") Long eventId, @Autowired PartakingTypeOptions partakingTypeOptions) {
         ModelAndView mav = new ModelAndView("partakings/new-existing");
         mav.addObject("allPartakingTypes", partakingTypeOptions.getOptions());
-        mav.addObject("allPersons", personRepository.findAll());
+        mav.addObject("persons", Collections.emptyList());
         mav.addObject("event", eventRepository.findOne(eventId));
+        mav.addObject("searchTerm", "");
+
+        return mav;
+    }
+
+    @RequestMapping(value="/new", method = RequestMethod.GET, params="search")
+    public ModelAndView searchPersons(Model model, @PathVariable("eventId") Long eventId, @Autowired PartakingTypeOptions partakingTypeOptions, @RequestParam("search") String searchTerm) {
+        ModelAndView mav = new ModelAndView("partakings/new-existing");
+        mav.addObject("allPartakingTypes", partakingTypeOptions.getOptions());
+        mav.addObject("event", eventRepository.findOne(eventId));
+
+        System.out.println(searchTerm);
+        List persons = personRepository.searchByName(searchTerm);
+        System.out.println(persons);
+        mav.addObject("persons", persons);
+        mav.addObject("searchTerm", searchTerm);
 
         return mav;
     }

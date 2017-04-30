@@ -6,17 +6,42 @@ extends ../layouts/default
 block content
     h1 #{event.datum} #{event.eventType}
 
-    form.pure-form.pure-form-aligned(method="POST" action="/events/#{event.id}/partakings/")
-        .pure-control-group
-            label Persoon
-            select(name="person")
-                each person in allPersons
-                    option(value="#{person.id}") #{person.voornaam} #{person.achternaam}
+    form.pure-form.pure-form-aligned(method="GET" action="/events/#{event.id}/partakings/new")
+        input(type="text", name="search", value="#{searchTerm}")
+        button.pure-button.pure-button-primary Zoeken
 
-        .pure-control-group
-            label Type
-            select(name="partakingType")
-                each partakingType in allPartakingTypes
-                    option(value=partakingType) #{partakingType}
+    each person in persons
+        .pure-g.result
+            .pure-u-2-3
+                p #{person.voornaam} #{person.achternaam}
+            .pure-u-1-3
+                form(method="POST" action="/events/#{event.id}/partakings/")
+                    input(type="hidden", name="person", value="#{person.id}")
+                    select(name="partakingType")
+                        each partakingType in allPartakingTypes
+                            option(value=partakingType) #{partakingType}
+                    button.pure-button.pure-button-primary Toevoegen
 
-        button.pure-button.pure-button-primary Opslaan
+    else
+        p Empty
+
+
+    //
+    //form.pure-form.pure-form-aligned(method="POST" action="/events/#{event.id}/partakings/")
+    //    .pure-control-group
+    //        label Persoon
+    //        //input(list="persons")
+    //        //select(name="person")
+    //        //    each person in allPersons
+    //        //        option(value="#{person.id}") #{person.voornaam} #{person.achternaam}
+    //
+    //    .pure-control-group
+    //        label Type
+    //        select(name="partakingType")
+    //            each partakingType in allPartakingTypes
+    //                option(value=partakingType) #{partakingType}
+    //button.pure-button.pure-button-primary Opslaan
+
+    //datalist#persons
+    //    each person in allPersons
+    //        option #{person.voornaam} #{person.achternaam}
