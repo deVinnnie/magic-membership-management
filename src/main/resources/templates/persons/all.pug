@@ -6,6 +6,6 @@ block content
     ul
         each person in persons
             li
-                a(href="/persons/details/#{person.id}") #{person.voornaam} #{person.achternaam}
+                a(href="/persons/#{person.id}") #{person.voornaam} #{person.achternaam}
 
     a.pure-button(href="/persons/new") Toevoegen

@@ -41,7 +41,7 @@ public class PartakingsController {
     public ModelAndView navigateToAddForm(Model model, @PathVariable("eventId") Long eventId, @Autowired PartakingTypeOptions partakingTypeOptions) {
         ModelAndView mav = new ModelAndView("partakings/new-existing");
         mav.addObject("allPartakingTypes", partakingTypeOptions.getOptions());
-        mav.addObject("persons", Collections.emptyList());
+        mav.addObject("persons", personRepository.findAll());
         mav.addObject("event", eventRepository.findOne(eventId));
         mav.addObject("searchTerm", "");
 

@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"person_id", "event_id"})})
-public class Partaking extends AbstractEntity{
+public class Partaking extends AbstractEntity<Long>{
 
     @ManyToOne
     @NotNull

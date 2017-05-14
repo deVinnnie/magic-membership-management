@@ -6,11 +6,11 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntity<T> {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private T id;
 
     @Version
     private Long version;
@@ -18,11 +18,11 @@ public abstract class AbstractEntity {
     public AbstractEntity() {
     }
 
-    public Long getId() {
+    public T getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(T id) {
         this.id = id;
     }
 

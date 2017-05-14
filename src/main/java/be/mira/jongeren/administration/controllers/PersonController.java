@@ -42,6 +42,16 @@ public class PersonController {
         return mav;
     }
 
+    @RequestMapping(value="{id}/edit", method = RequestMethod.GET)
+    public ModelAndView navigateToEditForm(Model model, @PathVariable("id") Long id, @Autowired GenderOptions genderOptions) {
+        ModelAndView mav = new ModelAndView("persons/edit");
+        mav.addObject("genderOptions", genderOptions.getOptions());
+
+        Person person = personRepository.findOne(id);
+        mav.addObject("person", person);
+        return mav;
+    }
+
     @RequestMapping(value="/", method = RequestMethod.POST)
     public ModelAndView add(@ModelAttribute Person person,  @RequestParam("postcode")  String postcode){
         City city = cityRepository.findByPostcode(postcode);
@@ -54,7 +64,7 @@ public class PersonController {
         return mav;
     }
 
-    @RequestMapping(value="/details/{id}", method = RequestMethod.GET)
+    @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public ModelAndView details(@PathVariable("id") Long id) {
         Person person = personRepository.findOne(id);
         ModelAndView mav = new ModelAndView("persons/details", "person", person);

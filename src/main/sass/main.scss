@@ -1,3 +1,5 @@
+@import 'fonts';
+
 .result{
   border: 1px solid gray;
 
@@ -7,7 +9,8 @@
   padding: 0.5em;
   text-align: center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.10);
-  background: #2d3e50;
+  //background: #2d3e50;
+  background: #EEE;
 
   .pure-menu-heading {
     color: white;
@@ -67,4 +70,28 @@
 .content {
   padding: 1em 1em 3em;
   padding-top: 7em;
+}
+
+.gender{
+
+  margin: 5px;
+
+  &:before{
+    font-family: FontAwesome;
+    font-style: normal;
+    font-size: 40px;
+    color: #617580;
+  }
+
+  &.male:before {
+    content: "\f222";
+  }
+
+  &.female:before{
+    content: "\f221";
+  }
+
+  &.unkown:before{
+    content: "\f22d";
+  }
 }

@@ -5,19 +5,18 @@
 extends ../layouts/default
 
 block content
-    label Voornaam
-    p #{person.voornaam}
-    
-    label Achternaam
-    p #{person.achternaam}
-    
-    label Geslacht
-    p #{person.gender}
-    
-    label Stad
-    p #{person.city.name}
-    
-    label Postcodes
-    p #{person.city.postcode}
-    
+
+    h1
+        | #{person.voornaam} #{person.achternaam}
+        i(class="gender #{person.gender.title}")
+    table.pure-table
+        tbody
+            tr
+                td Stad
+                td #{person.city.postcode} #{person.city.name}
+
+    h2 Memberships
+    p stalkjsldf
+
     a(href="/persons/") Back
+    a(href="/persons/#{person.id}/edit") Edit

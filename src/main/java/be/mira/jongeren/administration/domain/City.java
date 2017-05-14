@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Entity;
 
 @Entity
-public class City extends AbstractEntity{
+public class City extends AbstractEntity<Long>{
 
     @NotBlank
     private String postcode;

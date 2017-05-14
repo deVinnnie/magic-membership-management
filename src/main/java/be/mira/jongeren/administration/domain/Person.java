@@ -6,10 +6,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
+import java.lang.reflect.Member;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-public class Person extends AbstractEntity{
+public class Person extends AbstractEntity<Long>{
 
     @NotBlank
     private String voornaam;
@@ -26,6 +28,9 @@ public class Person extends AbstractEntity{
     @Past
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate birthDate;
+//
+//    @OneToMany
+//    private List<Membership> memberships;
 
     public Person(){}
 

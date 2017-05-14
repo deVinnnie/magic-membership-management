@@ -1,0 +1,32 @@
+//-@ var genderOptions: Array[be.mira.jongeren.administration.domain.Gender]
+
+extends ../layouts/default
+
+block content
+    form.pure-form.pure-form-aligned(action="/persons/", method="POST")
+        .pure-control-group
+            label Voornaam
+            input(type="text" name="voornaam", value="#{person.voornaam}")
+
+        .pure-control-group
+            label Achternaam
+            input(type="text" name="achternaam", value="#{person.achternaam}")
+
+        .pure-control-group
+            label Geslacht
+            select(name="gender")
+                each gender in genderOptions
+                    if gender == person.gender
+                        option(value="#{gender.toString()}", selected) #{gender.toString()}
+                    else
+                        option(value="#{gender.toString()}") #{gender.toString()}
+
+        .pure-control-group
+            label Geboortedatum
+            input(type="text" name="birthDate", value="#{person.birthDate}")
+
+        .pure-control-group
+            label Stad
+            input(type="text" name="postcode", value="#{person.city.postcode}")
+
+        button.pure-button.pure-button.pure-button-primary Opslaan

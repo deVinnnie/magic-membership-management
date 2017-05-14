@@ -1,0 +1,7 @@
+extends ../layouts/default
+
+block content
+    ul
+        each membership in memberships
+            li
+                a(href="/memberships/#{membership.id}") #{membership.id} #{membership.person.voornaam} #{membership.person.achternaam}
