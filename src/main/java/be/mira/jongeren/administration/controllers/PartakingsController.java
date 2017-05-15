@@ -66,7 +66,7 @@ public class PartakingsController {
     @RequestMapping(value="/", method = RequestMethod.POST)
     public ModelAndView add(@PathVariable("eventId") Long eventId,
                             @ModelAttribute Partaking partaking,
-                            @ModelAttribute("person") Person person)
+                            @RequestParam("person") Person person)
     {
         Event event = eventRepository.findOne(eventId);
 
@@ -79,18 +79,5 @@ public class PartakingsController {
 
         ModelAndView mav = new ModelAndView("redirect:/events/" + event.getId());
         return mav;
-    }
-
-    // Util
-    @ModelAttribute("person") // <---- Note the attribute name...this is    important
-    public Object getPerson(HttpServletRequest request) {
-        if(!request.getMethod().equals("POST")) {
-            return null;
-        }
-
-        // find primary key
-        Long id = Long.parseLong(request.getParameter("person"));
-
-        return personRepository.findOne(id);
     }
 }
