@@ -9,8 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class PersonConverter implements Converter<String, Person> {
 
-    @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    public PersonConverter(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
     @Override
     public Person convert(String id) {
