@@ -192,9 +192,7 @@
                 <configuration>
                     <!-- Sets the VM argument line used when unit tests are run. -->
                     <argLine>${argLine}</argLine>
-                    <!-- Skips unit tests if the value of skip.unit.tests property is true -->
-                    <skipTests>false</skipTests>
-                    <!-- Excludes integration tests when unit tests are run. -->
+                    <!-- Excludes Selenium Tests by default -->
                     <excludes>
                         <exclude>**/*SeleniumTest.java</exclude>
                     </excludes>
