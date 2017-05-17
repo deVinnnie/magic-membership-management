@@ -6,9 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Event{
@@ -46,7 +44,7 @@ public class Event{
     private LocalDate datum;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    private List<Partaking> partakings = new ArrayList<>();
+    private Set<Partaking> partakings = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -72,11 +70,11 @@ public class Event{
         this.datum = datum;
     }
 
-    public List<Partaking> getPartakings() {
+    public Set<Partaking> getPartakings() {
         return partakings;
     }
 
-    public void setPartakings(List<Partaking> partakings) {
+    public void setPartakings(Set<Partaking> partakings) {
         this.partakings = partakings;
     }
 

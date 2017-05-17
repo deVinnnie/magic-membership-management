@@ -7,10 +7,7 @@ import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.ninja_squad.dbsetup.Operations.*;
@@ -44,23 +41,6 @@ public class PartakingSeleniumTest extends SeleniumTest {
     public void testAddPartakingGivesCorrectResult() {
         PartakingCreationPage partakingCreationPage = new PartakingCreationPage(driver(), getBaseUrl());
         partakingCreationPage.submit();
-
-        Event event = eventRepository.getOne(10L);
-        assertEquals(1, event.getPartakings().size());
-    }
-
-    @Test
-    public void testAddPartakingForSamePersonDoesNothing() {
-        PartakingCreationPage partakingCreationPage;
-        partakingCreationPage = new PartakingCreationPage(driver(), getBaseUrl());
-        partakingCreationPage
-                .selectPerson("Harry Potter")
-                .submit();
-
-        partakingCreationPage = new PartakingCreationPage(driver(), getBaseUrl());
-        partakingCreationPage
-                .selectPerson("Harry Potter")
-                .submit();
 
         Event event = eventRepository.getOne(10L);
         assertEquals(1, event.getPartakings().size());
