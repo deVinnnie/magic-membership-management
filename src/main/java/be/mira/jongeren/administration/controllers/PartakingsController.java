@@ -50,13 +50,9 @@ public class PartakingsController {
 
     @RequestMapping(value="/new", method = RequestMethod.GET, params="search")
     public ModelAndView searchPersons(Model model, @PathVariable("eventId") Long eventId, @Autowired PartakingTypeOptions partakingTypeOptions, @RequestParam("search") String searchTerm) {
-        ModelAndView mav = new ModelAndView("partakings/new-existing");
-        mav.addObject("allPartakingTypes", partakingTypeOptions.getOptions());
-        mav.addObject("event", eventRepository.findOne(eventId));
+        ModelAndView mav = this.navigateToAddForm(model, eventId, partakingTypeOptions);
 
-        System.out.println(searchTerm);
         List persons = personRepository.searchByName(searchTerm);
-        System.out.println(persons);
         mav.addObject("persons", persons);
         mav.addObject("searchTerm", searchTerm);
 
