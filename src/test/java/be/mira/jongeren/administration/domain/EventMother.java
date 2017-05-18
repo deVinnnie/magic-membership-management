@@ -22,7 +22,7 @@ public class EventMother {
         Person.PersonBuilder personBuilder = new Person.PersonBuilder();
         Event event = eventBuilder.build();
 
-        event.getPartakings().add(
+        event.addPartaking(
                 new Partaking(
                         personBuilder.build(),
                         PartakingType.DEELNEMER,

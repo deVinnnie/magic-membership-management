@@ -82,6 +82,12 @@ public class Event{
         this.partakings.add(partaking);
     }
 
+    public void addPartakings(List<Partaking> partakings){
+        for(Partaking partaking : partakings) {
+            this.partakings.add(partaking);
+        }
+    }
+
     public EventType getEventType() {
         return eventType;
     }
