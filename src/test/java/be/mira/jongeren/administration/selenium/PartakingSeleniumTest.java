@@ -40,7 +40,13 @@ public class PartakingSeleniumTest extends SeleniumTest {
     @Test
     public void testAddPartakingGivesCorrectResult() {
         PartakingCreationPage partakingCreationPage = new PartakingCreationPage(driver(), getBaseUrl());
+
         partakingCreationPage.submit();
+
+        partakingCreationPage
+                .searchForPerson("Harry Potter");
+        //partakingCreationPage.submit();
+        //partakingCreationPage.submit();
 
         Event event = eventRepository.getOne(10L);
         assertEquals(1, event.getPartakings().size());

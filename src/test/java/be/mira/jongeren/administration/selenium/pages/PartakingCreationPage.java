@@ -1,27 +1,28 @@
 package be.mira.jongeren.administration.selenium.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 public class PartakingCreationPage extends PageObject {
 
     @FindBy(tagName= "input")
     private WebElement saveButton;
 
-    @FindBy(name = "person")
-    private WebElement personSelectElement;
+    @FindBy(name = "search")
+    private WebElement searchBox;
+
+    @FindBy(className = "search-form")
+    private WebElement searchForm;
 
     public PartakingCreationPage(WebDriver webDriver, String baseUrl) {
         super(webDriver, baseUrl, "/events/10/partakings/new");
     }
 
-    public PartakingCreationPage selectPerson(String name){
-        Select typeSelectBox = new Select(this.personSelectElement);
-        typeSelectBox.selectByVisibleText(name);
-        return this;
+    public PartakingCreationPage searchForPerson(String searchTerm){
+        searchBox.sendKeys(searchTerm);
+        searchForm.submit();
+        return new PartakingCreationPage(driver(), baseUrl());
     }
 
     public void submit(){

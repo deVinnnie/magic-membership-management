@@ -55,14 +55,11 @@ public abstract class SeleniumTest {
 
     private String baseUrl = "http://localhost:8080";
 
-    private static final String SELENIUM_ENABLED_SYSTEM_PROPERTY = "selenium";
-
     @Autowired
     private DataSource dataSource;
 
     @BeforeClass
     public static void setUp(){
-        verifySeleniumEnablingPreConditions();
         initializeWebDriver();
     }
 
@@ -71,11 +68,6 @@ public abstract class SeleniumTest {
         Operation operation = deleteAllFrom("partaking", "event", "person");
         DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
         dbSetup.launch();
-    }
-
-    private static void verifySeleniumEnablingPreConditions(){
-        boolean isSeleniumEnabled = (System.getProperty(SELENIUM_ENABLED_SYSTEM_PROPERTY) != null);
-        assumeTrue("Selenium testing is disabled", isSeleniumEnabled);
     }
 
     private static void initializeWebDriver() {
