@@ -5,6 +5,14 @@ mixin menu-item(url, label)
 	li(class="pure-menu-item")
 		a(href=url, class="pure-menu-link")= label
 
+mixin search-form(action)
+	form.search-form.pure-form.pure-form-aligned(method="GET" action=action)
+		input(type="text", name="search", value="#{searchTerm}")
+		button.pure-button.pure-button-primary Zoeken
+
+mixin search-result()
+	.result
+
 doctype html
 html(lang="en")
 	head

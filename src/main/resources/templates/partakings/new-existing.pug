@@ -6,9 +6,7 @@ extends ../layouts/default
 block content
     h1 #{event.datum} #{event.eventType}
 
-    form.pure-form.pure-form-aligned(method="GET" action="/events/#{event.id}/partakings/new")
-        input(type="text", name="search", value="#{searchTerm}")
-        button.pure-button.pure-button-primary Zoeken
+    +search-form("/events/#{event.id}/partakings/new")
 
     each person in persons
         .pure-g.result
