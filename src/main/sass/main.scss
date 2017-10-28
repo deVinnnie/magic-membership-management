@@ -95,3 +95,25 @@
     content: "\f22d";
   }
 }
+
+.partaking-type{
+    &:before{
+        font-family: FontAwesome;
+        font-style: normal;
+        font-size: 40px;
+        color: #617580;
+    }
+
+
+    &.participant:before{
+        content: "\f0c0";
+    }
+
+    &.assistant:before{
+        content: "\f007";
+    }
+
+    &.external:before{
+        content: "\f2c0";
+    }
+}
