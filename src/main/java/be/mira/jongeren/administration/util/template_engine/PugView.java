@@ -1,5 +1,6 @@
 package be.mira.jongeren.administration.util.template_engine;
 
+import be.mira.jongeren.administration.util.date.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.View;
 import ro.pippo.core.Application;
@@ -30,6 +31,12 @@ public class PugView implements View{
 
     @Override
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        modelFilter(model, request, response);
+
         templateEngine.renderResource(templateName + ".pug", (Map<String, Object>) model, response.getWriter());
+    }
+
+    private <T> void modelFilter(Map<String, T> model, HttpServletRequest request, HttpServletResponse response){
+        model.put("dateHelper", (T) new DateHelper());
     }
 }

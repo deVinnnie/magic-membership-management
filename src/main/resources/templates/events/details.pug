@@ -1,11 +1,9 @@
-//-@ var event: be.mira.jongeren.administration.domain.Event
-
 extends ../layouts/default
 
 block content
     a(href="/events") back
 
-    h1 #{event.datum} (#{event.eventType})
+    h1 #{pippo.formatTime(dateHelper.asDate(event.getDatum()), "dd MMMM yyyy")} (#{event.eventType})
 
     table.pure-table
         thead

@@ -1,10 +1,26 @@
-//-@ var events: java.util.List[be.mira.jongeren.administration.domain.Event]
-
 extends ../layouts/default
 
 block content
-    ul
-        each event in events
-            li
-                a(href="/events/#{event.getId()}") #{event.getDatum()} #{event.getEventType()}
+    .pure-menu.pure-menu-horizontal
+        ul.pure-menu-list
+        each year in availableYears
+            if year == currentYear
+                li.pure-menu-item.pure-menu-selected
+                    a.pure-menu-link(href="/events?year=#{year}") #{year}
+            else
+                li.pure-menu-item
+                    a.pure-menu-link(href="/events?year=#{year}") #{year}
+
+
+    h1 #{currentYear}
+    each val,key in categories
+        h2 #{key}
+
+        ul
+        each event in val
+          li
+            a(href="/events/#{event.getId()}") #{pippo.formatTime(dateHelper.asDate(event.getDatum()), "dd MMMM yyyy")}
+        else
+          li Empty
+
     a.pure-button(href="/events/new") Toevoegen

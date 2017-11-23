@@ -39,7 +39,6 @@ public class Event{
     @Version
     private Long version;
 
-    //@Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate datum;
 
