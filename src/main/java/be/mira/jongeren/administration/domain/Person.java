@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import java.lang.reflect.Member;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -134,6 +135,16 @@ public class Person extends AbstractEntity<Long>{
         public PersonBuilder achternaam(String achternaam){
             this.achternaam = achternaam;
             return this;
+        }
+    }
+
+    public static class AlphabeticComparator implements Comparator<Person> {
+
+        @Override
+        public int compare(Person person1, Person person2) {
+            String name1 = person1.getVoornaam() + person1.getAchternaam();
+            String name2 = person2.getVoornaam() + person2.getAchternaam();
+            return name1.compareTo(name2);
         }
     }
 }

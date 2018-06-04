@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Event{
@@ -72,6 +73,30 @@ public class Event{
     public Set<Partaking> getPartakings() {
         return partakings;
     }
+
+    public List<Partaking> getPartakings(PartakingType type) {
+        Person.AlphabeticComparator comparator = new Person.AlphabeticComparator();
+        List<Partaking> filteredPartakings = partakings
+                .stream()
+                .filter(p -> p.getPartakingType().equals(type))
+                .collect(Collectors.toList());
+
+        filteredPartakings.sort((Partaking p1, Partaking p2) -> comparator.compare(p1.getPerson(), p2.getPerson()));
+        return filteredPartakings;
+    }
+
+    public List<Partaking> getParticipants(){
+        return getPartakings(PartakingType.DEELNEMER);
+    }
+
+    public List<Partaking> getAssistants(){
+        return getPartakings(PartakingType.LEIDING);
+    }
+
+    public List<Partaking> getExternal(){
+        return getPartakings(PartakingType.EXTERN);
+    }
+
 
     public void setPartakings(Set<Partaking> partakings) {
         this.partakings = partakings;

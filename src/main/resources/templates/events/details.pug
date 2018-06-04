@@ -1,22 +1,54 @@
 extends ../layouts/default
 
 block content
-    a(href="/events") back
+    a.back(href="/events") Terug
 
-    h1 #{pippo.formatTime(dateHelper.asDate(event.getDatum()), "dd MMMM yyyy")} (#{event.eventType})
+    h1 #{pippo.formatTime(dateHelper.asDate(event.getDatum()), "dd MMMM yyyy")} (#{pippo.i18n(event.eventType.toString())})
 
-    table.pure-table
+    h2 Deelnemers
+    table.pure-table.pure-table-bordered.pure-table-striped
         thead
             tr
                 th Voornaam
                 th Achternaam
                 th Type
         tbody
-        each partaking in event.partakings
+        each partaking in event.getParticipants()
             tr
                 td #{partaking.person.voornaam}
                 td #{partaking.person.achternaam}
                 td
                     i(class="partaking-type #{partaking.partakingType}")
+
+    h2 Leiding
+    table.pure-table.pure-table-bordered.pure-table-striped
+        thead
+            tr
+                th Voornaam
+                th Achternaam
+                th Type
+        tbody
+        each partaking in event.getAssistants()
+            tr
+                td #{partaking.person.voornaam}
+                td #{partaking.person.achternaam}
+                td
+                    i(class="partaking-type #{partaking.partakingType}")
+
+    h2 Extern
+    table.pure-table.pure-table-bordered.pure-table-striped
+        thead
+            tr
+                th Voornaam
+                th Achternaam
+                th Type
+        tbody
+        each partaking in event.getExternal()
+            tr
+                td #{partaking.person.voornaam}
+                td #{partaking.person.achternaam}
+                td
+                    i(class="partaking-type #{partaking.partakingType}")
+
 
     a.pure-button(href="/events/#{event.id}/partakings/new") Toevoegen
