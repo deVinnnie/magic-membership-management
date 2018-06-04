@@ -20,8 +20,9 @@ INSERT INTO partaking(id, version, partaking_type, event_id, person_id) VALUES
       ('40' , '1', 'DEELNEMER', '10', '80'),
       ('50' , '1', 'DEELNEMER', '10', '90');
 
-INSERT INTO membership(id, version, person_id, issue_date) VALUES
-      ('10' , '1', '10', '2015-01-01');
-INSERT INTO membership(id, version, person_id, issue_date) VALUES
-      ('20' , '1', '10', '2016-01-01');
-
+--
+--INSERT INTO membership(id, version, person_id, issue_date) VALUES
+--      ('10' , '1', '10', '2015-01-01');
+--INSERT INTO membership(id, version, person_id, issue_date) VALUES
+--      ('20' , '1', '10', '2016-01-01');
+--

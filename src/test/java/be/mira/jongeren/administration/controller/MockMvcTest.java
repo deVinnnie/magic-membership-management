@@ -1,6 +1,7 @@
 package be.mira.jongeren.administration.controller;
 
 import be.mira.jongeren.administration.Application;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
@@ -68,5 +69,13 @@ public abstract class MockMvcTest {
 
     protected DataSource dataSource(){
         return this.dataSource;
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

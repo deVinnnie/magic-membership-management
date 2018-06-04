@@ -1,8 +1,15 @@
 package be.mira.jongeren.administration.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum PartakingType {
+
+//    @JsonProperty("participant")
     DEELNEMER("participant"),
+//    @JsonProperty("assistant")
     LEIDING("assistant"),
+//    @JsonProperty("external")
     EXTERN("external");
 
     private String representation;
@@ -13,6 +20,11 @@ public enum PartakingType {
 
     @Override
     public String toString() {
+        return this.representation;
+    }
+
+    @JsonValue
+    public String getRepresentation(){
         return this.representation;
     }
 }
