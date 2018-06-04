@@ -1,0 +1,12 @@
+extends ../layouts/default
+
+block content
+    h1 #{year}
+
+    p Max = #{summary.getMax()}
+    p Min = #{summary.getMin()}
+    p Average = #{summary.getAverage()}
+
+    each event in events
+        li
+            a(href="/events/#{event.getId()}") #{event.getDatum()} #{event.getEventType()} #{event.getNumberOfParticipants()}
