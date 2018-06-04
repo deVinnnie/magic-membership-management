@@ -3,9 +3,13 @@ package be.mira.jongeren.administration.domain;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-public class City extends AbstractEntity<Long>{
+public class City {
+
+    @Id
+    private Long id;
 
     @NotBlank
     private String postcode;

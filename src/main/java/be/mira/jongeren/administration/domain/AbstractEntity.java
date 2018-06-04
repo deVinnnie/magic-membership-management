@@ -1,15 +1,12 @@
 package be.mira.jongeren.administration.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class AbstractEntity<T> {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private T id;
 
     @Version
