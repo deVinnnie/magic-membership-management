@@ -20,6 +20,7 @@ public class PugTemplateConfig {
 
         PippoSettings pippoSettings = new PippoSettings(RuntimeMode.DEV);
         pippoSettings.overrideSetting(PippoConstants.SETTING_TEMPLATE_PATH_PREFIX, "/templates");
+        pippoSettings.overrideSetting(PippoConstants.SETTING_APPLICATION_LANGUAGES, "nl");
 
         templateEngine.setFileExtension("pug");
         templateEngine.init(

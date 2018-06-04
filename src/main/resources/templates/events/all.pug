@@ -11,16 +11,15 @@ block content
                 li.pure-menu-item
                     a.pure-menu-link(href="/events?year=#{year}") #{year}
 
+    a.pure-button.add(href="/events/new") Toevoegen
 
     h1 #{currentYear}
     each val,key in categories
-        h2 #{key}
+        h2 #{pippo.i18n(key.toString())}
 
         ul
-        each event in val
-          li
-            a(href="/events/#{event.getId()}") #{pippo.formatTime(dateHelper.asDate(event.getDatum()), "dd MMMM yyyy")}
-        else
-          li Empty
-
-    a.pure-button(href="/events/new") Toevoegen
+          each event in val
+            li
+              a(href="/events/#{event.getId()}") #{pippo.formatTime(dateHelper.asDate(event.getDatum()), "dd MMMM yyyy")}
+          else
+            li Empty

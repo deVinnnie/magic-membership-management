@@ -38,5 +38,6 @@ public class PugView implements View{
 
     private <T> void modelFilter(Map<String, T> model, HttpServletRequest request, HttpServletResponse response){
         model.put("dateHelper", (T) new DateHelper());
+        model.put(PippoConstants.REQUEST_PARAMETER_LANG, (T) "nl");
     }
 }

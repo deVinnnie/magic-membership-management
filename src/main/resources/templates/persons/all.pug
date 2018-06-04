@@ -1,9 +1,22 @@
 extends ../layouts/default
 
 block content
-    ul
-        each person in persons
-            li
-                a(href="/persons/#{person.id}") #{person.voornaam} #{person.achternaam}
+    a.add.pure-button(href="/persons/new") Toevoegen
 
-    a.pure-button(href="/persons/new") Toevoegen
+    table.pure-table
+        thead
+            tr
+                th Voornaam
+                th Achternaam
+                th Geslacht
+                th
+        tbody
+        each person in persons
+            tr
+                td #{person.voornaam}
+                td #{person.achternaam}
+                td
+                    i(class="gender #{person.gender.title}")
+                td
+                    a.details(href="/persons/#{person.id}")
+
