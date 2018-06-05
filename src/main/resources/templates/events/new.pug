@@ -1,6 +1,3 @@
-//-@ var eventTypeOptions: Array[be.mira.jongeren.administration.domain.EventType]
-//= attributes("title") = "Activiteit Toevoegen"
-
 extends ../layouts/default
 
 block content
@@ -9,7 +6,7 @@ block content
             label Type
             select(name="eventType")
                 each eventType in eventTypeOptions
-                    option(value="#{eventType.toString()}") #{eventType.toString()}
+                    option(value="#{eventType.toString()}") #{pippo.i18n(eventType.toString())}
 
         .pure-control-group
             label Datum
