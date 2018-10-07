@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/persons")
@@ -43,7 +44,7 @@ public class PersonController {
     }
 
     @RequestMapping(value="{id}/edit", method = RequestMethod.GET)
-    public ModelAndView navigateToEditForm(Model model, @PathVariable("id") Long id, @Autowired GenderOptions genderOptions) {
+    public ModelAndView navigateToEditForm(Model model, @PathVariable("id") UUID id, @Autowired GenderOptions genderOptions) {
         ModelAndView mav = new ModelAndView("persons/edit");
         mav.addObject("genderOptions", genderOptions.getOptions());
 
@@ -65,7 +66,7 @@ public class PersonController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public ModelAndView details(@PathVariable("id") Long id) {
+    public ModelAndView details(@PathVariable("id") UUID id) {
         Person person = personRepository.findOne(id);
         ModelAndView mav = new ModelAndView("persons/details", "person", person);
         return mav;

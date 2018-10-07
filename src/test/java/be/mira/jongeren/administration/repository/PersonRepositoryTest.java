@@ -33,9 +33,9 @@ public class PersonRepositoryTest extends MockMvcTest{
                 deleteAllFrom("partaking", "event", "person"),
                 insertInto("person")
                         .columns("id", "voornaam", "achternaam")
-                        .values("10", "Harry", "Potter")
-                        .values("20", "Hermione", "Granger")
-                        .values("30", "Ron", "Weasley")
+                        .values("A0EEBC999C0B4EF8BB6D6BB9BD380A11", "Harry", "Potter")
+                        .values("B0EEBC999C0B4EF8BB6D6BB9BD380A11", "Hermione", "Granger")
+                        .values("C0EEBC999C0B4EF8BB6D6BB9BD380A11", "Ron", "Weasley")
                         .build()
         );
         DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);

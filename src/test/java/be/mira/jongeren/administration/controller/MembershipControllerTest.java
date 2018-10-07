@@ -27,7 +27,7 @@ public class MembershipControllerTest extends MockMvcTest{
                 deleteAllFrom("partaking", "event", "person"),
                 insertInto("person")
                         .columns("id", "voornaam", "achternaam", "gender")
-                        .values("15", "Harry", "Potter", "M")
+                        .values("A0EEBC999C0B4EF8BB6D6BB9BD380A11", "Harry", "Potter", "M")
                         .build()
         );
         DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource()), operation);
@@ -39,7 +39,7 @@ public class MembershipControllerTest extends MockMvcTest{
         mockMvc()
                 .perform(
                         post("/memberships/")
-                                .param("person.id", "15")
+                                .param("person.id", "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 )
                 .andExpect(

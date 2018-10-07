@@ -8,6 +8,7 @@ import com.ninja_squad.dbsetup.operation.Operation;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -31,6 +32,7 @@ import static com.ninja_squad.dbsetup.Operations.sequenceOf;
  *
  */
 @WebAppConfiguration
+@ActiveProfiles("tests")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={Application.class}) // Spring Boot config (includes component scan)
 @Transactional // Enables rollback after each test.

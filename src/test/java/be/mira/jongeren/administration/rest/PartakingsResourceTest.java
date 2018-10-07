@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
+import java.util.UUID;
+
 import static com.ninja_squad.dbsetup.Operations.*;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,7 +30,7 @@ public class PartakingsResourceTest extends MockMvcTest {
                 deleteAllFrom("partaking", "event", "person"),
                 insertInto("person")
                         .columns("id", "voornaam", "achternaam", "gender")
-                        .values("15", "Harry", "Potter", "M")
+                        .values("A0EEBC999C0B4EF8BB6D6BB9BD380A11", "Harry", "Potter", "M")
                         .build(),
                 insertInto("event")
                         .columns("id", "version", "datum", "event_type")
@@ -41,7 +43,7 @@ public class PartakingsResourceTest extends MockMvcTest {
 
     @Test
     public void doPostAddsPartaking() throws Exception {
-        PartakingDto partakingDto = new PartakingDto(15L, PartakingType.DEELNEMER);
+        PartakingDto partakingDto = new PartakingDto(UUID.fromString("a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"), PartakingType.DEELNEMER);
 
         mockMvc()
             .perform(

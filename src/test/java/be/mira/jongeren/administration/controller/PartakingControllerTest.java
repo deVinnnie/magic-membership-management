@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
+import java.util.UUID;
+
 import static com.ninja_squad.dbsetup.Operations.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
@@ -35,7 +37,7 @@ public class PartakingControllerTest extends MockMvcTest{
                 deleteAllFrom("partaking", "event", "person"),
                 insertInto("person")
                         .columns("id", "voornaam", "achternaam", "gender")
-                        .values("15", "Harry", "Potter", "M")
+                        .values("A0EEBC999C0B4EF8BB6D6BB9BD380A11", "Harry", "Potter", "M")
                         .build(),
                 insertInto("event")
                         .columns("id", "version", "datum", "event_type")
@@ -51,7 +53,7 @@ public class PartakingControllerTest extends MockMvcTest{
         mockMvc()
             .perform(
                 post("/events/10/partakings/")
-                    .param("person", "15")
+                    .param("person", "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11")
                     .param("partakingType", "DEELNEMER")
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             )
@@ -62,7 +64,7 @@ public class PartakingControllerTest extends MockMvcTest{
         assertEquals(1, partakingRepository.count());
         Partaking partaking =  partakingRepository.findAll().get(0);
         assertEquals(PartakingType.DEELNEMER, partaking.getPartakingType());
-        assertEquals(15L, (long) partaking.getPerson().getId());
+        assertEquals(UUID.fromString("a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"), partaking.getPerson().getId());
     }
 
     @Test
@@ -70,14 +72,14 @@ public class PartakingControllerTest extends MockMvcTest{
         mockMvc()
             .perform(
                 post("/events/10/partakings/")
-                        .param("person", "15")
-                        .param("partakingType", "DEELNEMER")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                    .param("person", "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11")
+                    .param("partakingType", "DEELNEMER")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             );
         mockMvc()
             .perform(
                 post("/events/10/partakings/")
-                    .param("person", "15")
+                    .param("person", "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11")
                     .param("partakingType", "DEELNEMER")
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED)
         );

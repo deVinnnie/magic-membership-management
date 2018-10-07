@@ -5,10 +5,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PartakingDto {
 
-    private Long id;
+    private UUID id;
     private PartakingType type;
 
     public PartakingDto() {
@@ -16,14 +18,14 @@ public class PartakingDto {
 
     @JsonCreator
     public PartakingDto(
-            @JsonProperty("id") Long personId,
+            @JsonProperty("id") UUID personId,
             @JsonProperty("type") PartakingType partakingType
     ) {
         this.id = personId;
         this.type = partakingType;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 

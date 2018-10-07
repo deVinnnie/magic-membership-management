@@ -5,14 +5,36 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-
-import java.lang.reflect.Member;
 import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.List;
+import java.util.UUID;
 
 @Entity
-public class Person extends AbstractEntity<Long>{
+public class Person{
+
+    @Id
+    @GeneratedValue
+    private UUID id;
+
+    @Version
+    private Long version;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
 
     @NotBlank
     private String voornaam;
