@@ -38,7 +38,7 @@ public class PersonCreationPage extends PageObject{
     }
 
     public PersonCreationPage enterBirthDate(String birthDate){
-        birthDateField.sendKeys("1979-09-19");
+        birthDateField.sendKeys(birthDate);
         return this;
     }
 

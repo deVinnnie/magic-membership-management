@@ -25,7 +25,7 @@ public class PersonSeleniumTest extends SeleniumTest {
         personCreationPage.enterFirstName("Hermione")
                           .enterLastName("Granger")
                           .selectGender("F")
-                          .enterBirthDate("1979-09-19")
+                          .enterBirthDate("19091979")
                           .submit();
 
         List<Person> allPersons = personRepository.findAll();
