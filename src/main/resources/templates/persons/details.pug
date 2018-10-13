@@ -1,20 +1,21 @@
-//-@ var person: be.mira.jongeren.administration.domain.Person
-//
-// <f:viewParam name="id" value="#{personDetailsBean.id}"/>
-// <f:viewAction action="#{personDetailsBean.onParametersLoaded()}" />
 extends ../layouts/default
 
 block content
 
     a.back(href="/persons/") Terug
+    a.add.pure-button(href="/persons/#{person.id}/edit") Edit
 
     h1
         | #{person.voornaam} #{person.achternaam}
         i(class="gender #{person.gender.title}")
-    table.pure-table
-        tbody
-            tr
-                td Stad
-                td #{person.city.postcode} #{person.city.name}
 
-    a(href="/persons/#{person.id}/edit") Edit
+    p #{person.city.postcode} #{person.city.name}
+
+    if not empty(person.birthDate)
+        p #{pippo.formatTime(dateHelper.asDate(person.getBirthDate()), "dd MMMM yyyy")}
+
+    h1 Deelnames
+    ul
+      each event in events
+          li
+            a(href="/events/#{event.getId()}") #{pippo.formatTime(dateHelper.asDate(event.getDatum()), "dd MMMM yyyy")}

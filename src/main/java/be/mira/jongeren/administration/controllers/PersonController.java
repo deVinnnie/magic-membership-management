@@ -1,5 +1,8 @@
 package be.mira.jongeren.administration.controllers;
 
+import be.mira.jongeren.administration.domain.Event;
+import be.mira.jongeren.administration.domain.Partaking;
+import be.mira.jongeren.administration.repository.PartakingRepository;
 import be.mira.jongeren.administration.util.GenderOptions;
 import be.mira.jongeren.administration.domain.City;
 import be.mira.jongeren.administration.domain.Person;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/persons")
@@ -20,6 +24,9 @@ public class PersonController {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private PartakingRepository partakingsRepository;
 
     @Autowired
     private CityRepository cityRepository;
@@ -54,13 +61,20 @@ public class PersonController {
     }
 
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public ModelAndView add(@ModelAttribute Person person,  @RequestParam("postcode")  String postcode){
+    public ModelAndView add(
+        @ModelAttribute Person person,
+        @RequestParam("postcode")  String postcode
+    ){
         City city = cityRepository.findByPostcode(postcode);
 
         person.setCity(city);
 
-        personRepository.save(person);
+        if(person.getId()!=null) {
+            Long version = personRepository.findOne(person.getId()).getVersion();
+            person.setVersion(version);
+        }
 
+        personRepository.save(person);
         ModelAndView mav = new ModelAndView("redirect:/persons");
         return mav;
     }
@@ -68,7 +82,14 @@ public class PersonController {
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public ModelAndView details(@PathVariable("id") UUID id) {
         Person person = personRepository.findOne(id);
+
+        List<Event> events = partakingsRepository.findForPerson(id)
+                .stream()
+                .map(Partaking::getEvent)
+                .collect(Collectors.toList());
+
         ModelAndView mav = new ModelAndView("persons/details", "person", person);
+        mav.addObject("events", events);
         return mav;
     }
 }

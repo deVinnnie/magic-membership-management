@@ -1,9 +1,8 @@
-//-@ var genderOptions: Array[be.mira.jongeren.administration.domain.Gender]
-
 extends ../layouts/default
 
 block content
     form.pure-form.pure-form-aligned(action="/persons/", method="POST")
+        input(type="hidden", name="id", value="#{person.id.toString()}")
         .pure-control-group
             label Voornaam
             input(type="text" name="voornaam", value="#{person.voornaam}")
@@ -23,7 +22,12 @@ block content
 
         .pure-control-group
             label Geboortedatum
-            input(type="text" name="birthDate", value="#{person.birthDate}")
+
+            if not empty(person.getBirthDate())
+                - var birthDate = pippo.formatTime(dateHelper.asDate(person.getBirthDate()),"yyyy-MM-dd")
+                input(type="date" name="birthDate" value="#{birthDate}")
+            else
+                input(type="date" name="birthDate")
 
         .pure-control-group
             label Stad
