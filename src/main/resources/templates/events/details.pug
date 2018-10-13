@@ -5,8 +5,7 @@ block content
 
     h1 #{pippo.formatTime(dateHelper.asDate(event.getDatum()), "dd MMMM yyyy")} (#{pippo.i18n(event.eventType.toString())})
 
-    h2 Deelnemers
-        i(class="partaking-type participant")
+    h2 Deelnemers (#{size(event.getParticipants())})
     table.pure-table.pure-table-bordered.pure-table-striped
         thead
             tr
@@ -24,8 +23,7 @@ block content
                 td Geen data
                 td
 
-    h2 Leiding
-        i(class="partaking-type assistant")
+    h2 Leiding (#{size(event.getAssistants())})
     table.pure-table.pure-table-bordered.pure-table-striped
         thead
             tr
@@ -41,8 +39,7 @@ block content
                 td Geen data
                 td
 
-    h2 Extern
-        i(class="partaking-type external")
+    h2 Extern (#{size(event.getExternal())})
     table.pure-table.pure-table-bordered.pure-table-striped
         thead
             tr
