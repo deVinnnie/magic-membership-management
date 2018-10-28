@@ -91,6 +91,12 @@
             <version>${pippo.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-csv</artifactId>
+            <version>2.9.7</version>
+        </dependency>
+
 
         <!-- Test -->
         <dependency>
