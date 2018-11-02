@@ -51,17 +51,16 @@ public class StatisticsController {
     ) throws JsonProcessingException {
         List<Event> eventsInYear = eventRepository.findByYear(year, type);
 
-        Map<String, Long> occurencePerPostCode = eventsInYear
+        Map<City, Long> occurencePerPostCode = eventsInYear
                 .stream()
                 .flatMap(e -> e.getParticipants().stream())
                 .map(Partaking::getPerson)
-                .map(Person::getCity)
-                .collect(groupingBy(City::getPostcode, counting()));
+                .collect(groupingBy(Person::getCity, counting()));
 
         List<GeographicDistribution> geographicDistribution = occurencePerPostCode
                 .entrySet()
                 .stream()
-                .map(entry -> new GeographicDistribution(entry.getKey(), entry.getValue()))
+                .map(entry -> new GeographicDistribution(entry.getKey().getPostcode(), entry.getKey().getName(), entry.getValue()))
                 .collect(Collectors.toList());
 
         CsvMapper mapper = new CsvMapper();
