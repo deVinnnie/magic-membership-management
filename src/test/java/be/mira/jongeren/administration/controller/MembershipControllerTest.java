@@ -4,26 +4,26 @@ import be.mira.jongeren.administration.repository.MembershipRepository;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class MembershipControllerTest extends MockMvcTest{
+class MembershipControllerTest extends MockMvcTest{
 
     @Autowired
     private MembershipRepository membershipRepository;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    void setup() {
         Operation operation = sequenceOf(
                 deleteAllFrom("partaking", "event", "person"),
                 insertInto("person")
@@ -36,8 +36,8 @@ public class MembershipControllerTest extends MockMvcTest{
     }
 
     @Test
-    @Ignore
-    public void createMembership() throws Exception {
+    @Disabled
+    void createMembership() throws Exception {
         mockMvc()
                 .perform(
                         post("/memberships/")

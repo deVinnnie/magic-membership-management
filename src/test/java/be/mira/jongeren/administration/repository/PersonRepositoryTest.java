@@ -5,8 +5,8 @@ import be.mira.jongeren.administration.domain.Person;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
@@ -19,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class PersonRepositoryTest extends MockMvcTest{
+class PersonRepositoryTest extends MockMvcTest{
 
     @Autowired
     private PersonRepository personRepository;
@@ -27,8 +27,8 @@ public class PersonRepositoryTest extends MockMvcTest{
     @Autowired
     private DataSource dataSource;
 
-    @Before
-    public void setup(){
+    @BeforeEach
+    void setup(){
         Operation operation = sequenceOf(
                 deleteAllFrom("partaking", "event", "person"),
                 insertInto("person")
@@ -43,43 +43,43 @@ public class PersonRepositoryTest extends MockMvcTest{
     }
 
     @Test
-    public void searchByNameWithFullFirstName() {
+    void searchByNameWithFullFirstName() {
         List<Person> results = personRepository.searchByName("Harry");
         assertThat(results, hasSize(equalTo(1)));
     }
 
     @Test
-    public void searchByNameWithFullLastName() {
+    void searchByNameWithFullLastName() {
         List<Person> results = personRepository.searchByName("Granger");
         assertThat(results, hasSize(equalTo(1)));
     }
 
     @Test
-    public void searchByNameWithSingleLetter() {
+    void searchByNameWithSingleLetter() {
         List<Person> results = personRepository.searchByName("H");
         assertThat(results, hasSize(equalTo(2)));
     }
 
     @Test
-    public void searchByNameWithFirstNameAndLastName() {
+    void searchByNameWithFirstNameAndLastName() {
         List<Person> results = personRepository.searchByName("rry Po");
         assertThat(results, hasSize(equalTo(1)));
     }
 
     @Test
-    public void searchByNameWithLowerCaseTerm() {
+    void searchByNameWithLowerCaseTerm() {
         List<Person> results = personRepository.searchByName("harry");
         assertThat(results, hasSize(equalTo(1)));
     }
 
     @Test
-    public void searchByNameWithEmptyStringReturnsAllPersons() {
+    void searchByNameWithEmptyStringReturnsAllPersons() {
         List<Person> results = personRepository.searchByName("");
         assertThat(results, hasSize(equalTo(3)));
     }
 
     @Test
-    public void searchByNameWithNullReturnsEmptyList() {
+    void searchByNameWithNullReturnsEmptyList() {
         List<Person> results = personRepository.searchByName(null);
         assertThat(results, hasSize(equalTo(0)));
     }

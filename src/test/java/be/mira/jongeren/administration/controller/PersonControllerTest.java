@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.controller;
 
 import be.mira.jongeren.administration.repository.PersonRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -11,13 +11,13 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class PersonControllerTest extends MockMvcTest{
+class PersonControllerTest extends MockMvcTest{
 
     @Autowired
     private PersonRepository personRepository;
 
     @Test
-    public void doPostPersistsPerson() throws Exception {
+    void doPostPersistsPerson() throws Exception {
         mockMvc()
             .perform(
                 post("/persons/")

@@ -7,22 +7,21 @@ import com.ninja_squad.dbsetup.operation.Operation;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.sql.DataSource;
 import javax.transaction.Transactional;
 
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
-import static com.ninja_squad.dbsetup.Operations.insertInto;
-import static com.ninja_squad.dbsetup.Operations.sequenceOf;
-import static org.junit.Assume.assumeTrue;
 
 /**
  * Abstract base class to setup the WebDriver
@@ -44,7 +43,7 @@ import static org.junit.Assume.assumeTrue;
  * then check if your version of the Chrome is compatible with the version of chromedriver.
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ContextConfiguration(classes={Application.class})
 @Transactional // Enables rollback after each test.
@@ -63,7 +62,7 @@ public abstract class SeleniumTest {
         initializeWebDriver();
     }
 
-    @Before
+    @BeforeEach
     public void setup(){
         Operation operation = deleteAllFrom("partaking", "event", "person");
         DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
@@ -77,7 +76,7 @@ public abstract class SeleniumTest {
                 .maximize();
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() {
         if (driver != null) {
             driver.quit();

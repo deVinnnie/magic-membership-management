@@ -4,7 +4,7 @@ import be.mira.jongeren.administration.domain.Event;
 import be.mira.jongeren.administration.domain.EventType;
 import be.mira.jongeren.administration.repository.EventRepository;
 import be.mira.jongeren.administration.selenium.pages.EventCreationPage;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -13,16 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class EventSeleniumTest extends SeleniumTest  {
+class EventSeleniumTest extends SeleniumTest  {
 
     @Autowired
     private EventRepository eventRepository;
 
     @Test
-    public void addEventFormPersistsEvent(){
+    void addEventFormPersistsEvent(){
         EventCreationPage eventCreationPage = new EventCreationPage(driver(), getBaseUrl());
         eventCreationPage.enterDate("2015-01-01")
                          .selectEventType("SUPERNOVA")

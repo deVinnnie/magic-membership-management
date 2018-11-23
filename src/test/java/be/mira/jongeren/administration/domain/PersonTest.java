@@ -1,25 +1,25 @@
 package be.mira.jongeren.administration.domain;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
 import java.time.LocalDate;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PersonTest extends BeanValidatorTest{
+class PersonTest extends BeanValidatorTest{
 
     private Person.PersonBuilder builder;
 
-    @Before
-    public void setUp(){
+    @BeforeEach
+    void setUp(){
         this.builder = new Person.PersonBuilder();
     }
 
     @Test
-    public void birthDateInFutureGivesValidationError(){
+    void birthDateInFutureGivesValidationError(){
         Person person = builder.build();
 
         LocalDate dateThenYearsInTheFuture = LocalDate.now().plusYears(10);

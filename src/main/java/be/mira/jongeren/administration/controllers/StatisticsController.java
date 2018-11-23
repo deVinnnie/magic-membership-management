@@ -2,6 +2,7 @@ package be.mira.jongeren.administration.controllers;
 
 import be.mira.jongeren.administration.domain.*;
 import be.mira.jongeren.administration.repository.EventRepository;
+import be.mira.jongeren.administration.statistics.EventSummary;
 import be.mira.jongeren.administration.statistics.GeographicDistribution;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -41,6 +42,18 @@ public class StatisticsController {
         mav.addObject("year", year);
         mav.addObject("summary", summaryStatistics);
         return mav;
+    }
+
+    @RequestMapping(value="/overview/{year}.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public List<EventSummary> overviewAsJson(@PathVariable("year") int year){
+        return eventRepository.findByYear(year, null)
+                .stream()
+                .map(e -> new EventSummary(
+                    e.getDatum(),
+                    e.getNumberOfAssistants()
+                ))
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value="/geographic-distribution/{year}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)

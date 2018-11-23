@@ -7,8 +7,8 @@ import be.mira.jongeren.administration.repository.EventRepository;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -19,13 +19,13 @@ import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class PartakingsResourceTest extends MockMvcTest {
+class PartakingsResourceTest extends MockMvcTest {
 
     @Autowired
     private EventRepository eventRepository;
 
-    @Before
-    public void setup(){
+    @BeforeEach
+    void setup(){
         Operation operation = sequenceOf(
                 deleteAllFrom("partaking", "event", "person"),
                 insertInto("person")
@@ -42,7 +42,7 @@ public class PartakingsResourceTest extends MockMvcTest {
     }
 
     @Test
-    public void doPostAddsPartaking() throws Exception {
+    void doPostAddsPartaking() throws Exception {
         PartakingDto partakingDto = new PartakingDto(UUID.fromString("a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"), PartakingType.DEELNEMER);
 
         mockMvc()

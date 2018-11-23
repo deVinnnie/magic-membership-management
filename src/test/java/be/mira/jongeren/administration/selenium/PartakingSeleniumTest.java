@@ -6,21 +6,21 @@ import be.mira.jongeren.administration.selenium.pages.PartakingCreationPage;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.ninja_squad.dbsetup.Operations.*;
 import static org.junit.Assert.assertEquals;
 
-@Ignore
-public class PartakingSeleniumTest extends SeleniumTest {
+@Disabled
+class PartakingSeleniumTest extends SeleniumTest {
 
     @Autowired
     private EventRepository eventRepository;
 
-    @Before
+    @BeforeEach
     @Override
     public void setup(){
         Operation operation = sequenceOf(
@@ -40,7 +40,7 @@ public class PartakingSeleniumTest extends SeleniumTest {
 
 
     @Test
-    public void testAddPartakingGivesCorrectResult() {
+    void testAddPartakingGivesCorrectResult() {
         PartakingCreationPage partakingCreationPage = new PartakingCreationPage(driver(), getBaseUrl());
 
         partakingCreationPage.submit();

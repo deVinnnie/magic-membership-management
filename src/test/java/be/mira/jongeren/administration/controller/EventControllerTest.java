@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.controller;
 
 import be.mira.jongeren.administration.repository.EventRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -10,17 +10,17 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class EventControllerTest extends MockMvcTest{
+class EventControllerTest extends MockMvcTest{
 
     @Autowired
     private EventRepository eventRepository;
 
     @Test
-    public void doPostPersistsEvent() throws Exception {
+    void doPostPersistsEvent() throws Exception {
         mockMvc()
             .perform(
                 post("/events/")

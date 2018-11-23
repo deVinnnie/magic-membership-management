@@ -8,8 +8,8 @@ import be.mira.jongeren.administration.repository.PartakingRepository;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -17,13 +17,13 @@ import java.util.UUID;
 
 import static com.ninja_squad.dbsetup.Operations.*;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class PartakingControllerTest extends MockMvcTest{
+class PartakingControllerTest extends MockMvcTest{
 
     @Autowired
     private PartakingRepository partakingRepository;
@@ -31,8 +31,8 @@ public class PartakingControllerTest extends MockMvcTest{
     @Autowired
     private EventRepository eventRepository;
 
-    @Before
-    public void setup(){
+    @BeforeEach
+    void setup(){
         Operation operation = sequenceOf(
                 deleteAllFrom("partaking", "event", "person"),
                 insertInto("person")
@@ -49,7 +49,7 @@ public class PartakingControllerTest extends MockMvcTest{
     }
 
     @Test
-    public void createPartaking() throws Exception {
+    void createPartaking() throws Exception {
         mockMvc()
             .perform(
                 post("/events/10/partakings/")
@@ -68,7 +68,7 @@ public class PartakingControllerTest extends MockMvcTest{
     }
 
     @Test
-    public void createPartakingForSamePersonTwiceDoesNothing() throws Exception {
+    void createPartakingForSamePersonTwiceDoesNothing() throws Exception {
         mockMvc()
             .perform(
                 post("/events/10/partakings/")
@@ -89,7 +89,7 @@ public class PartakingControllerTest extends MockMvcTest{
     }
 
     @Test
-    public void searchPersonsReturns() throws Exception {
+    void searchPersonsReturns() throws Exception {
         mockMvc()
             .perform(
                 get("/events/10/partakings/new")

@@ -1,48 +1,47 @@
 package be.mira.jongeren.administration.domain;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EventTest extends BeanValidatorTest{
+
+class EventTest extends BeanValidatorTest{
 
     private Event.EventBuilder builder;
     private Person.PersonBuilder personBuilder;
 
-    @Before
-    public void setUp(){
+    @BeforeEach
+    void setUp(){
         this.builder = new Event.EventBuilder();
         this.personBuilder = new Person.PersonBuilder();
     }
 
     @Test
-    public void eventTypeNullGivesValidationError(){
+    void eventTypeNullGivesValidationError(){
         Event event = builder.type(null).build();
         Set<ConstraintViolation<Event>> violations = validator().validateProperty(event, "eventType");
         assertEquals(1, violations.size());
     }
 
     @Test
-    public void getNumberOfParticipantsReturnsZeroForEmptyPartakingsList(){
+    void getNumberOfParticipantsReturnsZeroForEmptyPartakingsList(){
         Event event = builder.build();
         assertEquals(0, event.getNumberOfParticipants());
     }
 
     @Test
-    public void getNumberOfParticipantsReturnsOneForPartakingsListWithSingleParticipant(){
+    void getNumberOfParticipantsReturnsOneForPartakingsListWithSingleParticipant(){
         Event event = EventMother.createEventWithSingleParticipant();
         assertEquals(1, event.getNumberOfParticipants());
     }
 
     @Test
-    public void getNumberOfPartakingsOfTypeReturnsCorrectResult(){
+    void getNumberOfPartakingsOfTypeReturnsCorrectResult(){
         Event event = builder.build();
         event.addPartakings(Arrays.asList(
             new Partaking(personBuilder.voornaam("Harry").build(), PartakingType.DEELNEMER, event),
@@ -56,7 +55,7 @@ public class EventTest extends BeanValidatorTest{
     }
 
     @Test
-    public void addPartakingWithDuplicatePersonDoesNothing(){
+    void addPartakingWithDuplicatePersonDoesNothing(){
         Person person = personBuilder
                             .voornaam("Hermione")
                             .achternaam("Granger")
@@ -73,7 +72,7 @@ public class EventTest extends BeanValidatorTest{
     }
 
     @Test
-    public void addPartakingWithDuplicatePersonAndDifferentPartakingTypeDoesNothing(){
+    void addPartakingWithDuplicatePersonAndDifferentPartakingTypeDoesNothing(){
         Person person = personBuilder
                 .voornaam("Hermione")
                 .achternaam("Granger")

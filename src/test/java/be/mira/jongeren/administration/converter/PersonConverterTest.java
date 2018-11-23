@@ -3,22 +3,22 @@ package be.mira.jongeren.administration.converter;
 import be.mira.jongeren.administration.converters.PersonConverter;
 import be.mira.jongeren.administration.domain.Person;
 import be.mira.jongeren.administration.repository.PersonRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
-@RunWith(MockitoJUnitRunner.class)
-public class PersonConverterTest {
+@ExtendWith(MockitoExtension.class)
+class PersonConverterTest {
 
     @Mock
     private PersonRepository personRepository;
@@ -26,28 +26,32 @@ public class PersonConverterTest {
     @InjectMocks
     private PersonConverter converter;
 
-    @Before
-    public void setup(){
-        Person person = new Person("Harry", "Potter");
+    Person person;
+
+    @BeforeEach
+    void setup(){
+        person = new Person("Harry", "Potter");
         person.setId(UUID.fromString("a98adb54-c6d1-4881-9154-023b0e7e545e"));
-        Mockito.when(personRepository.getOne(UUID.fromString("a98adb54-c6d1-4881-9154-023b0e7e545e"))).thenReturn(person);
-        Mockito.when(personRepository.getOne(UUID.fromString("a98adb54-c6d1-4881-1555-023b0e7e545e"))).thenReturn(null);
     }
 
     @Test
-    public void convertWithInvalidNumberReturnsNull(){
+    void convertWithInvalidNumberReturnsNull(){
         Person result = converter.convert("not-a-number");
         assertNull(result);
     }
 
     @Test
-    public void convertWithExistingIdReturnsPerson(){
+    void convertWithExistingIdReturnsPerson(){
+        Mockito.when(personRepository.getOne(UUID.fromString("a98adb54-c6d1-4881-9154-023b0e7e545e"))).thenReturn(person);
+
         Person result = converter.convert("a98adb54-c6d1-4881-9154-023b0e7e545e");
         assertNotNull(result);
     }
 
     @Test
-    public void convertWithNonExistingIdReturnsNull(){
+    void convertWithNonExistingIdReturnsNull(){
+        Mockito.when(personRepository.getOne(UUID.fromString("a98adb54-c6d1-4881-1555-023b0e7e545e"))).thenReturn(null);
+
         Person result = converter.convert("a98adb54-c6d1-4881-1555-023b0e7e545e");
         assertNull(result);
     }
