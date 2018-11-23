@@ -55,7 +55,7 @@ public class PersonController {
         ModelAndView mav = new ModelAndView("persons/edit");
         mav.addObject("genderOptions", genderOptions.getOptions());
 
-        Person person = personRepository.findOne(id);
+        Person person = personRepository.getOne(id);
         mav.addObject("person", person);
         return mav;
     }
@@ -70,7 +70,7 @@ public class PersonController {
         person.setCity(city);
 
         if(person.getId()!=null) {
-            Long version = personRepository.findOne(person.getId()).getVersion();
+            Long version = personRepository.getOne(person.getId()).getVersion();
             person.setVersion(version);
         }
 
@@ -81,7 +81,7 @@ public class PersonController {
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public ModelAndView details(@PathVariable("id") UUID id) {
-        Person person = personRepository.findOne(id);
+        Person person = personRepository.getOne(id);
 
         List<Event> events = partakingsRepository.findForPerson(id)
                 .stream()

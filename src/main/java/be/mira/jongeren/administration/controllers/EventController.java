@@ -70,10 +70,7 @@ public class EventController {
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public ModelAndView details(@PathVariable("id") Long id) {
-        Event event = eventRepository.findOne(id);
-        if(event == null){
-            throw new ResourceNotFound();
-        }
+        Event event = eventRepository.findById(id).orElseThrow(ResourceNotFound::new);
         ModelAndView mav = new ModelAndView("events/details", "event", event);
         return mav;
     }

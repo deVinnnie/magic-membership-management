@@ -1,6 +1,6 @@
 package be.mira.jongeren.administration.domain;
 
-import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentityGenerator;
 
 import java.io.Serializable;
@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class EventIdentityGenerator extends IdentityGenerator {
 
     @Override
-    public Serializable generate(SessionImplementor session, Object obj) {
+    public Serializable generate(SharedSessionContractImplementor session, Object obj) {
         if(obj instanceof Event) {
             Event event = (Event) obj;
 

@@ -55,7 +55,7 @@ public class PartakingsResourceTest extends MockMvcTest {
                 status().is2xxSuccessful()
             );
 
-        Event event = eventRepository.findOne(10L);
+        Event event = eventRepository.getOne(10L);
         assertEquals(1, event.getNumberOfParticipants());
     }
 

@@ -5,6 +5,7 @@ import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -35,6 +36,7 @@ public class MembershipControllerTest extends MockMvcTest{
     }
 
     @Test
+    @Ignore
     public void createMembership() throws Exception {
         mockMvc()
                 .perform(

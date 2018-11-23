@@ -1,20 +1,18 @@
 package be.mira.jongeren.administration.controllers;
 
-import be.mira.jongeren.administration.util.PartakingTypeOptions;
 import be.mira.jongeren.administration.domain.Event;
 import be.mira.jongeren.administration.domain.Partaking;
 import be.mira.jongeren.administration.domain.Person;
 import be.mira.jongeren.administration.repository.EventRepository;
+import be.mira.jongeren.administration.repository.PartakingRepository;
 import be.mira.jongeren.administration.repository.PersonRepository;
+import be.mira.jongeren.administration.util.PartakingTypeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -27,9 +25,12 @@ public class PartakingsController {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private PartakingRepository partakingRepository;
+
     @RequestMapping(value="/", method = RequestMethod.GET)
     public ModelAndView viewPartakings(@PathVariable("eventId") Long eventId){
-        Event event = eventRepository.findOne(eventId);
+        Event event = eventRepository.getOne(eventId);
 
         ModelAndView mav = new ModelAndView("partakings/all");
         mav.addObject("partakings", event.getPartakings());
@@ -42,7 +43,7 @@ public class PartakingsController {
         ModelAndView mav = new ModelAndView("partakings/add");
         mav.addObject("allPartakingTypes", partakingTypeOptions.getOptions());
         mav.addObject("persons", personRepository.findAll());
-        mav.addObject("event", eventRepository.findOne(eventId));
+        mav.addObject("event", eventRepository.getOne(eventId));
         mav.addObject("searchTerm", "");
 
         return mav;
@@ -64,14 +65,18 @@ public class PartakingsController {
                             @ModelAttribute Partaking partaking,
                             @RequestParam("person") Person person)
     {
-        Event event = eventRepository.findOne(eventId);
+        Event event = eventRepository.getOne(eventId);
 
         partaking.setPerson(person);
         partaking.setEvent(event);
 
-        event.addPartaking(partaking);
+        if(!event.getPartakings().contains(partaking)){
+            partakingRepository.save(partaking);
 
-        eventRepository.flush();
+            event.addPartaking(partaking);
+
+            eventRepository.save(event);
+        }
 
         ModelAndView mav = new ModelAndView("redirect:/events/" + event.getId());
         return mav;

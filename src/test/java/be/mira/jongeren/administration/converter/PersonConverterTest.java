@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.UUID;
 
@@ -30,8 +30,8 @@ public class PersonConverterTest {
     public void setup(){
         Person person = new Person("Harry", "Potter");
         person.setId(UUID.fromString("a98adb54-c6d1-4881-9154-023b0e7e545e"));
-        Mockito.when(personRepository.findOne(UUID.fromString("a98adb54-c6d1-4881-9154-023b0e7e545e"))).thenReturn(person);
-        Mockito.when(personRepository.findOne(UUID.fromString("a98adb54-c6d1-4881-1555-023b0e7e545e"))).thenReturn(null);
+        Mockito.when(personRepository.getOne(UUID.fromString("a98adb54-c6d1-4881-9154-023b0e7e545e"))).thenReturn(person);
+        Mockito.when(personRepository.getOne(UUID.fromString("a98adb54-c6d1-4881-1555-023b0e7e545e"))).thenReturn(null);
     }
 
     @Test

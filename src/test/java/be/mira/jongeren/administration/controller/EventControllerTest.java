@@ -33,6 +33,6 @@ public class EventControllerTest extends MockMvcTest{
             );
 
         assertThat(eventRepository.findAll(), hasSize(equalTo(1)));
-        assertNotNull(eventRepository.findOne(201601010L));
+        assertNotNull(eventRepository.getOne(201601010L));
     }
 }

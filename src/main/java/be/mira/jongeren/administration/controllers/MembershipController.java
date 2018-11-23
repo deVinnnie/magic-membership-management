@@ -30,7 +30,7 @@ public class MembershipController {
     @RequestMapping(value="{id}", method = RequestMethod.GET)
     public ModelAndView getMembership(@PathVariable("id") Long id){
         ModelAndView mav = new ModelAndView("memberships/details");
-        Membership membership = membershipRepository.findOne(id);
+        Membership membership = membershipRepository.getOne(id);
         mav.addObject("membership", membership);
         return mav;
     }

@@ -23,8 +23,8 @@ public class PartakingsResource {
         @PathVariable("eventId") Long eventId,
         @RequestBody PartakingDto partakingDto
     ){
-        Event event = eventRepository.findOne(eventId);
-        Person person = personRepository.findOne(partakingDto.getId());
+        Event event = eventRepository.getOne(eventId);
+        Person person = personRepository.getOne(partakingDto.getId());
 
         Partaking partaking = new Partaking(person, partakingDto.getType(), event);
 

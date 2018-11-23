@@ -2,6 +2,7 @@ package be.mira.jongeren.administration.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"person_id", "event_id"})})
@@ -53,13 +54,17 @@ public class Partaking extends AbstractEntity<Long>{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
 
         Partaking partaking = (Partaking) o;
 
-        if (person != null ? !person.equals(partaking.person) : partaking.person != null) return false;
-        return event != null ? event.equals(partaking.event) : partaking.event == null;
+         return Objects.equals(person, partaking.person) &&
+                Objects.equals(event, partaking.event);
     }
 
     @Override

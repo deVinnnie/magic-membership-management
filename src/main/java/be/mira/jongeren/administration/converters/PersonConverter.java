@@ -21,7 +21,7 @@ public class PersonConverter implements Converter<String, Person> {
     @Override
     public Person convert(String id) {
         try {
-            return personRepository.findOne(UUID.fromString(id));
+            return personRepository.getOne(UUID.fromString(id));
         } catch (IllegalArgumentException e) {
             return null;
         }

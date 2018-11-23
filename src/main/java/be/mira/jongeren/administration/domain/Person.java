@@ -1,7 +1,7 @@
 package be.mira.jongeren.administration.domain;
 
 import be.mira.jongeren.administration.util.date.Past;
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
